@@ -1,6 +1,6 @@
 {
   "name": "@walnut/common",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "index.js",
   "license": "MIT",
   "gitHead": "fceca964dad54f1fe5c38500b4ff1a0c0e49c1da",
@@ -8,6 +8,7 @@
     "abbrev": "^1.1.1",
     "axios": "^0.22.0",
     "faker": "^5.5.3",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "twig": "^1.15.4"
   }
 }
