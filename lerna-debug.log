@@ -1,0 +1,6 @@
+43 warn complete Waiting for 1 child process to exit. CTRL-C to exit immediately.
+44 error Error: Command failed with exit code 128: git tag @walnut/common@1.0.2 -m @walnut/common@1.0.2
+44 error fatal: tag '@walnut/common@1.0.2' already exists
+44 error     at makeError (/home/ebgp/Documents/lerna-test/node_modules/@lerna/child-process/node_modules/execa/lib/error.js:60:11)
+44 error     at handlePromise (/home/ebgp/Documents/lerna-test/node_modules/@lerna/child-process/node_modules/execa/index.js:118:26)
+44 error     at processTicksAndRejections (internal/process/task_queues.js:95:5)
