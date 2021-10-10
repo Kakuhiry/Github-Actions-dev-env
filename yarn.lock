@@ -923,14 +923,15 @@
 
 "@walnut/common@file:/home/ebgp/Documents/lerna-test/packages/common":
   "resolved" "file:packages/common"
-  "version" "1.0.1"
+  "version" "1.0.2"
   dependencies:
+    "abbrev" "^1.1.1"
     "axios" "^0.22.0"
     "faker" "^5.5.3"
 
 "@walnut/server@file:/home/ebgp/Documents/lerna-test/packages/server":
   "resolved" "file:packages/server"
-  "version" "1.0.1"
+  "version" "1.1.0"
   dependencies:
     "axios" "^0.22.0"
     "ua-parser" "^0.3.5"
@@ -2682,9 +2683,9 @@
   dependencies:
     "lodash._reinterpolate" "^3.0.0"
 
-"lodash@^4.17.15", "lodash@^4.17.19", "lodash@^4.7.0":
+"lodash@^4.17.15", "lodash@^4.17.19", "lodash@^4.17.21", "lodash@^4.7.0":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
-  "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+  "resolved" "http://localhost:4873/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"
 
 "lru-cache@^6.0.0":
