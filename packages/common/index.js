@@ -1,3 +1,3 @@
 module.exports = () => {
-  console.log("hello from common 15 auto");
+  console.log("hello from common 16 auto");
 };
