@@ -4,9 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@walnut/common": "^1.0.1",
     "axios": "^0.22.0",
-    "graphql-yoga": "^1.14.7",
     "ua-parser": "^0.3.5"
   },
   "gitHead": "fceca964dad54f1fe5c38500b4ff1a0c0e49c1da"
