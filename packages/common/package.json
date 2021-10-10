@@ -1,6 +1,6 @@
 {
   "name": "@walnut/common",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "index.js",
   "license": "MIT",
   "gitHead": "a6329c3e433eff892ad8f7ddd714e4272c529461",
