@@ -930,12 +930,13 @@
 
 "@walnut/common@file:/home/ebgp/Documents/lerna-test/packages/common":
   "resolved" "file:packages/common"
-  "version" "1.0.17"
+  "version" "1.0.18"
   dependencies:
     "abbrev" "^1.1.1"
     "axios" "^0.22.0"
     "faker" "^5.5.3"
     "lodash" "^4.17.21"
+    "twig" "^1.15.4"
 
 "@walnut/server@file:/home/ebgp/Documents/lerna-test/packages/server":
   "resolved" "file:packages/server"

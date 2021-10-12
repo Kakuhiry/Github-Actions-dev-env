@@ -6,5 +6,8 @@
   "name": "lerna-test",
   "devDependencies": {
     "lerna": "^4.0.0"
+  },
+  "dependencies": {
+    "@walnut/common": "file:packages/common"
   }
 }
