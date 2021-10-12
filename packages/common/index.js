@@ -1,3 +1,3 @@
 module.exports = () => {
-  console.log("hello from common 200 from gcp-01");
+  console.log("hello from common 200 from gcp-02");
 };

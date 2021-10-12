@@ -23,6 +23,13 @@
     "chalk" "^2.0.0"
     "js-tokens" "^4.0.0"
 
+"@babel/runtime@^7.8.4":
+  "integrity" "sha512-99catp6bHCaxr4sJ/DbTGgHS4+Rs2RVd2g7iOap6SLGPDknRK9ztKNsE/Fg6QhSeh1FGE5f6gHGQmvvn3I3xhw=="
+  "resolved" "https://registry.npmjs.org/@babel/runtime/-/runtime-7.15.4.tgz"
+  "version" "7.15.4"
+  dependencies:
+    "regenerator-runtime" "^0.13.4"
+
 "@gar/promisify@^1.0.1":
   "integrity" "sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw=="
   "resolved" "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.2.tgz"
@@ -923,15 +930,16 @@
 
 "@walnut/common@file:/home/ebgp/Documents/lerna-test/packages/common":
   "resolved" "file:packages/common"
-  "version" "1.0.2"
+  "version" "1.0.17"
   dependencies:
     "abbrev" "^1.1.1"
     "axios" "^0.22.0"
     "faker" "^5.5.3"
+    "lodash" "^4.17.21"
 
 "@walnut/server@file:/home/ebgp/Documents/lerna-test/packages/server":
   "resolved" "file:packages/server"
-  "version" "1.1.0"
+  "version" "1.0.14"
   dependencies:
     "axios" "^0.22.0"
     "ua-parser" "^0.3.5"
@@ -1839,6 +1847,11 @@
   "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.4.tgz"
   "version" "1.14.4"
 
+"foreachasync@^3.0.0":
+  "integrity" "sha1-VQKYfchxS+M5IJfzLgBxyd7gfPY="
+  "resolved" "https://registry.npmjs.org/foreachasync/-/foreachasync-3.0.0.tgz"
+  "version" "3.0.0"
+
 "forever-agent@~0.6.1":
   "integrity" "sha1-+8cfDEGt6zf5bFd60e1C2P2sypE="
   "resolved" "https://registry.npmjs.org/forever-agent/-/forever-agent-0.6.1.tgz"
@@ -2658,6 +2671,11 @@
   dependencies:
     "p-locate" "^4.1.0"
 
+"locutus@^2.0.11":
+  "integrity" "sha512-2xWC4RkoAoCVXEb/stzEgG1TNgd+mrkLBj6TuEDNyUoKeQ2XzDTyJUC23sMiqbL6zJmJSP3w59OZo+zc4IBOmA=="
+  "resolved" "https://registry.npmjs.org/locutus/-/locutus-2.0.15.tgz"
+  "version" "2.0.15"
+
 "lodash._reinterpolate@^3.0.0":
   "integrity" "sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0="
   "resolved" "https://registry.npmjs.org/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz"
@@ -2820,7 +2838,7 @@
   "resolved" "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz"
   "version" "1.0.1"
 
-"minimatch@^3.0.4":
+"minimatch@^3.0.4", "minimatch@3.0.x":
   "integrity" "sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA=="
   "resolved" "https://registry.npmjs.org/minimatch/-/minimatch-3.0.4.tgz"
   "version" "3.0.4"
@@ -3767,6 +3785,11 @@
     "indent-string" "^4.0.0"
     "strip-indent" "^3.0.0"
 
+"regenerator-runtime@^0.13.4":
+  "integrity" "sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA=="
+  "resolved" "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.9.tgz"
+  "version" "0.13.9"
+
 "request@^2.88.0", "request@^2.88.2":
   "integrity" "sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw=="
   "resolved" "https://registry.npmjs.org/request/-/request-2.88.2.tgz"
@@ -4339,6 +4362,16 @@
   "resolved" "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz"
   "version" "0.14.5"
 
+"twig@^1.15.4":
+  "integrity" "sha512-gRpGrpdf+MswqF6eSjEdYZTa/jt3ZWHK/NU59IbTYJMBQXJ1W+7IxaGEwLkQjd+mNT15j9sQTzQumxUBkuQueQ=="
+  "resolved" "https://registry.npmjs.org/twig/-/twig-1.15.4.tgz"
+  "version" "1.15.4"
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    "locutus" "^2.0.11"
+    "minimatch" "3.0.x"
+    "walk" "2.3.x"
+
 "type-fest@^0.18.0":
   "integrity" "sha512-OIAYXk8+ISY+qTOwkHtKqzAuxchoMiD9Udx+FSGQDuiRR+PJKJHc2NJAXlbhkGwTt/4/nKZxELY1w3ReWOL8mw=="
   "resolved" "https://registry.npmjs.org/type-fest/-/type-fest-0.18.1.tgz"
@@ -4484,6 +4517,13 @@
     "assert-plus" "^1.0.0"
     "core-util-is" "1.0.2"
     "extsprintf" "^1.2.0"
+
+"walk@2.3.x":
+  "integrity" "sha512-4eRTBZljBfIISK1Vnt69Gvr2w/wc3U6Vtrw7qiN5iqYJPH7LElcYh/iU4XWhdCy2dZqv1ToMyYlybDylfG/5Vg=="
+  "resolved" "https://registry.npmjs.org/walk/-/walk-2.3.15.tgz"
+  "version" "2.3.15"
+  dependencies:
+    "foreachasync" "^3.0.0"
 
 "wcwidth@^1.0.0":
   "integrity" "sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g="
