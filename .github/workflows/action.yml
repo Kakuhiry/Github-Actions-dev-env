@@ -26,6 +26,13 @@ jobs:
       - name: Install Packages
         run: npm install
 
+      - name: Login Google Cloud
+        run: |
+          echo $CLOUD_DATA > gcloud.json
+          gcloud auth activate-service-account --key-file gcloud.json
+        env:
+          CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}   
+
       - name: Authenticate with Registry
         run: |
           echo "@SCOPE:registry=https://$REGISTRY_URL" > .npmrc
