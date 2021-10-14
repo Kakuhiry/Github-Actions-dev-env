@@ -38,7 +38,8 @@ jobs:
         run: |
           echo $NPMRC > .npmrc
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
-          
+          npm whoami --registry https://REGISTRY_URL
+
         env:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
