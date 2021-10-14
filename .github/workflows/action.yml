@@ -35,12 +35,7 @@ jobs:
 
       - name: Authenticate with Registry
         run: |
-          echo @SCOPE:registry=https://$REGISTRY_URL > .npmrc
-          echo >> .npmrc
-          echo //$REGISTRY_URL/:_password="$REGISTRY_PASSWORD" >> .npmrc
-          echo //$REGISTRY_URL/:username=$REGISTRY_USERNAME >> .npmrc
-          echo //$REGISTRY_URL/:email=not.valid@email.com >> .npmrc
-          echo //$REGISTRY_URL/:always-auth=true >> .npmrc
+          echo $NPMRC > .npmrc
           npm config set registry https://$REGISTRY_URL
           npx google-artifactregistry-auth .npmrc
           npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
@@ -48,6 +43,7 @@ jobs:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
           REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          NPMRC: ${{ secrets.NPMRC }}
 
       - name: Publish package
         run: "lerna publish --yes --message 'chore: release new versions'"
