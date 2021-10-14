@@ -28,6 +28,7 @@ jobs:
 
       - name: Login Google Cloud
         run: |
+        
           echo $CLOUD_DATA > gcloud.json
           gcloud auth activate-service-account --key-file gcloud.json
         env:
