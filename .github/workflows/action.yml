@@ -34,7 +34,7 @@ jobs:
           echo //$REGISTRY_URL/:username=$REGISTRY_USERNAME >> .npmrc
           echo //$REGISTRY_URL/:email=not.valid@email.com >> .npmrc
           echo "//$REGISTRY_URL/:always-auth=true" >> .npmrc
-          cat .npmrc
+          npx google-artifactregistry-auth .npmrc
           npm whoami --registry https://REGISTRY_URL
         env:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
