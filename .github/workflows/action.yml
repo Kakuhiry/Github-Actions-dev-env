@@ -39,7 +39,6 @@ jobs:
           echo $NPMRC > .npmrc
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
           npm whoami --registry https://REGISTRY_URL
-          echo $GITHUB_REF
 
         env:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
