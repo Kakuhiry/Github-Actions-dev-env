@@ -28,7 +28,7 @@ jobs:
 
       - name: Login Google Cloud
         run: |
-        
+
           echo $CLOUD_DATA > gcloud.json
           gcloud auth activate-service-account --key-file gcloud.json
         env:
@@ -37,9 +37,9 @@ jobs:
       - name: Authenticate with Registry
         run: |
           echo $NPMRC > .npmrc
-          npm config set registry https://$REGISTRY_URL
           npx google-artifactregistry-auth .npmrc
-          npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
+          npm config set registry https://$REGISTRY_URL
+          
         env:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
