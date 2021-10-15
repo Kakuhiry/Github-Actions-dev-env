@@ -27,7 +27,13 @@ jobs:
 
       - name: Authenticate with Registry
         run: |
-          echo $NPMRC > .npmrc
+          echo @SCOPE:registry=https://us-npm.pkg.dev/crack-linker-326904/our-registry/ > .npmrc
+          echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:_password="eWEyOS5hMEFScmRhTV9GelBEdklrVXh0YVdadllrcS11TU9IX2FlNVNfdmwxUjNMMXRtbmdFdV9YcVVNVVdacU1WMUt5TVhlZ1cwUHl0c0tNV2hJOURaTm5hVEdIb3dFU3FxcDhzOTk2c2VyY0tqNTA3SDVDSG9Cb2JERFZGOFZZbFBLS0VPOXVuTWc0aGQyY2czRHRrTk5YcTZUMlRoc3F2YQ==" >> .npmrc
+          echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:username=oauth2accesstoken >> .npmrc
+          echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:email=not.valid@email.com >> .npmrc
+          echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:always-auth=true >> .npmrc
+          cat .npmrc
+
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
         # npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
         env:
@@ -36,12 +42,11 @@ jobs:
           REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
           NPMRC: ${{ secrets.NPMRC }}
       
-      - name: commit
-        run: |
-          git add .
-          git commit -m "new version commit"
-          git push origin master
-          npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
+      # - name: commit
+      #   run: |
+      #     git add .
+      #     git commit -m "new version commit"
+      #     git push origin master
 
       - name: Publish to Artifact Registry
         run: |
