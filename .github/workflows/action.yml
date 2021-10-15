@@ -37,7 +37,6 @@ jobs:
 
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
           npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
-          cat .npmrc
           
         # npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
         # env:
