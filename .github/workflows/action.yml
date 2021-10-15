@@ -44,3 +44,7 @@ jobs:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
           REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
           NPMRC: ${{ secrets.NPMRC }}
+
+      - name: Publish to Artifact Registry
+        run: |
+          lerna publish --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
