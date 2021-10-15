@@ -36,11 +36,11 @@ jobs:
 
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
         # npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
-        env:
-          REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
-          REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-          NPMRC: ${{ secrets.NPMRC }}
+        # env:
+          # REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+          # REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          # REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          # NPMRC: ${{ secrets.NPMRC }}
       
       # - name: commit
       #   run: |
