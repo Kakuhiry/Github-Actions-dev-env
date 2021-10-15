@@ -36,6 +36,8 @@ jobs:
           cat .npmrc
 
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
+
+          lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
         # npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
         # env:
           # REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -49,7 +51,7 @@ jobs:
       #     git commit -m "new version commit"
       #     git push origin master
 
-      - name: Publish to Artifact Registry
-        run: |
-          lerna ls
-          lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
+      # - name: Publish to Artifact Registry
+      #   run: |
+      #     lerna ls
+      #     lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
