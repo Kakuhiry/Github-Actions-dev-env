@@ -3,7 +3,7 @@
   "version": "1.0.25",
   "main": "index.js",
   "license": "MIT",
-  "gitHead": "37d77f3af693339bb8819da66bd730f493c9ca62",
+  "gitHead": "e5c5a67c149d9d4b4509a76e85665a793fe92fca",
   "dependencies": {
     "abbrev": "^1.1.1",
     "axios": "^0.22.0",
