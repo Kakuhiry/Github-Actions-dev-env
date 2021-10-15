@@ -23,6 +23,7 @@ jobs:
           echo $CLOUD_DATA > gcloud.json
           gcloud auth activate-service-account --key-file gcloud.json
           gcloud auth list
+          lerna -v
         env:
           CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
 
