@@ -9,8 +9,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v1
+      - name: checkout branch
+        uses: actions/checkout@v2
+        with:
+          repository: 'Kakuhiry/lerna-test'
+          ref: 'master'
+          token: '$GITHUB_PTA'
+        env:
+          GITHUB_PTA: ${{ secrets.PTA }}
 
       # - name: Configure CI Git User
       #   run: |
