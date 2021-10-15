@@ -1,9 +1,9 @@
 {
   "name": "@walnut/common",
-  "version": "1.0.44",
+  "version": "1.0.45",
   "main": "index.js",
   "license": "MIT",
-  "gitHead": "8683686d814ea6d17ecf315937074e8a36a1ab07",
+  "gitHead": "f69c4e54535cc0207f6b1b0e8a5582216241617a",
   "dependencies": {
     "abbrev": "^1.1.1",
     "axios": "^0.22.0",
