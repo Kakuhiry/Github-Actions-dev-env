@@ -9,25 +9,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout branch
-      
-        uses: actions/checkout@v2
+      - name: git data
         run: |
-           git config --global user.name '@CurboCI'
-           git config --global user.email 'CurboCI@users.noreply.github.com'
-           git remote set-url origin https://github.com/Kakuhiry/lerna-test
+          git config --global user.name '@CurboCI'
+          git config --global user.email 'CurboCI@users.noreply.github.com'
+          git remote set-url origin https://github.com/Kakuhiry/lerna-test
+
+      - name: checkout branch
+        uses: actions/checkout@v2
         with:
-          repository: 'Kakuhiry/lerna-test'
-          ref: 'master'
-          token: '$GITHUB_PTA'
+          repository: "Kakuhiry/lerna-test"
+          ref: "master"
+          token: "$GITHUB_PTA"
         env:
           GITHUB_PTA: ${{ secrets.PTA }}
 
       # - name: Configure CI Git User
-        #  run: |
-          #  git config --global user.name '@CurboCI'
-          #  git config --global user.email 'CurboCI@users.noreply.github.com'
-          #  git remote set-url origin https://github.com/Kakuhiry/lerna-test
+      #  run: |
+      #  git config --global user.name '@CurboCI'
+      #  git config --global user.email 'CurboCI@users.noreply.github.com'
+      #  git remote set-url origin https://github.com/Kakuhiry/lerna-test
       #   env:
       #     GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
 
@@ -43,7 +44,7 @@ jobs:
           echo $CLOUD_DATA > gcloud.json
           gcloud auth activate-service-account --key-file gcloud.json
         env:
-          CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}   
+          CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
 
       - name: Authenticate with Registry
         run: |
@@ -61,4 +62,3 @@ jobs:
 
       - name: Getting the GITHUB_REF
         run: echo $GITHUB_REF
-          
