@@ -23,6 +23,13 @@ jobs:
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kakuhiry/lerna-test
         env:
           GITHUB_TOKEN: ${{ secrets.PTA }}
+
+      - name: commit
+        run: |
+          git add .
+          git commit -m "new version commit"
+          git push origin master
+
       - name: Install
         run: npm install
 
@@ -47,4 +54,5 @@ jobs:
 
       - name: Publish to Artifact Registry
         run: |
+          lerna ls
           lerna publish --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
