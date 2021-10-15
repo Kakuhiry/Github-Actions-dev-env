@@ -1,10 +1,10 @@
 {
   "name": "@walnut/server",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@walnut/common": "^1.0.20",
+    "@walnut/common": "^1.0.21",
     "axios": "^0.22.0",
     "ua-parser": "^0.3.5"
   },
