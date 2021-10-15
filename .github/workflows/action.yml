@@ -1,0 +1,49 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Git Identity
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kakuhiry/lerna-test
+        env:
+          GITHUB_TOKEN: ${{ secrets.PTA }}
+
+      - name: Login Google Cloud
+        run: |
+          echo $CLOUD_DATA > gcloud.json
+          gcloud auth activate-service-account --key-file gcloud.json
+        env:
+          CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
+
+      - name: Authenticate with Registry
+        run: |
+          echo $NPMRC > .npmrc
+          npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
+        # npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
+        env:
+          REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          NPMRC: ${{ secrets.NPMRC }}
+      
+      - name: commit
+        run: |
+          git add .
+          git commit -m "new version commit"
+          git push origin master
+          npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
+
+      - name: Publish to Artifact Registry
+        run: |
+          lerna ls
+          lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
