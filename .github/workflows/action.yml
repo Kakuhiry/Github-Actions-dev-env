@@ -2,9 +2,7 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
+
 jobs:
   publish:
     name: Publish
@@ -22,20 +20,26 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kakuhiry/lerna-test
         env:
           GITHUB_TOKEN: ${{ secrets.PTA }}
       - name: Install
-        if: steps.cache-modules.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Build
-        run: yarn build
-      - name: Setup Node ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-          registry-url: 'https://registry.npmjs.org'
-      - name: Publish
-        run: yarn publish:all
+        run: npm install
+
+      - name: Login Google Cloud
+        run: |
+          echo $CLOUD_DATA > gcloud.json
+          gcloud auth activate-service-account --key-file gcloud.json
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
+
+      - name: Authenticate with Registry
+        run: |
+          echo $NPMRC > .npmrc
+          npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
+          npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
+        env:
+          REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
+          REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          NPMRC: ${{ secrets.NPMRC }}
