@@ -1,10 +1,10 @@
 {
   "name": "@walnut/sermer",
-  "version": "1.0.49",
+  "version": "1.0.50",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@walnut/common": "^1.0.55",
+    "@walnut/common": "^1.0.56",
     "axios": "^0.22.0",
     "ua-parser": "^0.3.5"
   },
