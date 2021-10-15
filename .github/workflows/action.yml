@@ -1,64 +1,46 @@
-name: CD
-
 on:
   push:
     branches:
       - master
-
+  pull_request:
+    branches:
+      - master
 jobs:
-  build:
+  publish:
+    name: Publish
     runs-on: ubuntu-latest
+      publish:
+    name: Publish
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-      - name: git data
-        run: |
-          git config --global user.name '@CurboCI'
-          git config --global user.email 'CurboCI@users.noreply.github.com'
-          git remote set-url origin https://github.com/Kakuhiry/lerna-test
-
-      - name: checkout branch
+      - name: Checkout
         uses: actions/checkout@v2
+      - name: Cache node_modules
+        id: cache-modules
+        uses: actions/cache@v1
         with:
-          repository: "Kakuhiry/lerna-test"
-          ref: "master"
-          token: "$GITHUB_PTA"
-        env:
-          GITHUB_PTA: ${{ secrets.PTA }}
-
-      # - name: Configure CI Git User
-      #  run: |
-      #  git config --global user.name '@CurboCI'
-      #  git config --global user.email 'CurboCI@users.noreply.github.com'
-      #  git remote set-url origin https://github.com/Kakuhiry/lerna-test
-      #   env:
-      #     GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
-
-      # - name: Checkout and pull branch
-      #   run: git checkout master && git pull
-
-      - name: Install Packages
-        run: npm install
-
-      - name: Login Google Cloud
+          path: node_modules
+          key: 12.x-${{ runner.OS }}-build-${{ hashFiles('package.json') }}
+      - name: Git Identity
         run: |
-
-          echo $CLOUD_DATA > gcloud.json
-          gcloud auth activate-service-account --key-file gcloud.json
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
         env:
-          CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
-
-      - name: Authenticate with Registry
-        run: |
-          echo $NPMRC > .npmrc
-          npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
-
+          GITHUB_TOKEN: ${{ secrets.PTA }}
+      - name: Install
+        if: steps.cache-modules.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Setup Node ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+          registry-url: 'https://registry.npmjs.org'
+      - name: Publish
+        run: yarn publish:all
         env:
-          REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-          REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
-          REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-          NPMRC: ${{ secrets.NPMRC }}
-
-      - name: Publish package
-        run: "lerna publish --yes --message 'chore: release new versions'"
-
-      - name: Getting the GITHUB_REF
-        run: echo $GITHUB_REF
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
