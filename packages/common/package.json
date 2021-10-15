@@ -1,6 +1,6 @@
 {
-  "name": "@walnut/common",
-  "version": "1.0.42",
+  "name": "@walnut/cammon",
+  "version": "1.0.41",
   "main": "index.js",
   "license": "MIT",
   "gitHead": "3ac63ecb62b2f34c3e50decdfea2a7757248a964",
