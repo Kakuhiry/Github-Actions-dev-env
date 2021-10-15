@@ -52,5 +52,6 @@ jobs:
 
       - name: Publish to Artifact Registry
         run: |
+          cat .npmrc
           lerna ls
           lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
