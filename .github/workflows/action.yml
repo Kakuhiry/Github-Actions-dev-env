@@ -49,6 +49,7 @@ jobs:
           git add .
           git commit -m "new version commit"
           git push origin master
+          npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
 
       - name: Publish to Artifact Registry
         run: |
