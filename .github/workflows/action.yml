@@ -43,6 +43,12 @@ jobs:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
           REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
           NPMRC: ${{ secrets.NPMRC }}
+      
+      - name: commit
+        run: |
+          git add .
+          git commit -m "new version commit"
+          git push origin master
 
       - name: Publish to Artifact Registry
         run: |
