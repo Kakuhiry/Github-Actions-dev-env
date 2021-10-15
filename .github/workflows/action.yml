@@ -18,15 +18,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PTA }}
 
-      # - name: commit
-      #   run: |
-      #     git add .
-      #     git commit -m "new version commit"
-      #     git push origin master
-
-      # - name: Install
-      #   run: npm install
-
       - name: Login Google Cloud
         run: |
           echo $CLOUD_DATA > gcloud.json
