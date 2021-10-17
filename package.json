@@ -3,6 +3,9 @@
     "packages/*"
   ],
   "name": "lerna-test",
+  "scripts": {
+    "artifactregistry-login": "npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc"
+  },
   "devDependencies": {
     "lerna": "^3.22.1"
   },
