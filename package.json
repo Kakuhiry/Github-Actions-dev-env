@@ -5,7 +5,7 @@
   "name": "lerna-test",
   "scripts": {
     "artifactregistry-login": "npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc",
-    "bump-patch": "npx lerna publish --cd-version major --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes"
+    "bump-major": "npx lerna publish --cd-version major --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes"
   },
   "devDependencies": {
     "lerna": "^3.22.1"
