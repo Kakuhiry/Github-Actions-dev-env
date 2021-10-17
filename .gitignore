@@ -3,3 +3,4 @@ node_modules
 commands.sh
 .npmrc-example
 lerna-debug.log
+lerna-debug.log
