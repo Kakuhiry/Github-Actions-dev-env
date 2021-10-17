@@ -4,4 +4,4 @@ commands.sh
 .npmrc-example
 lerna-debug.log
 lerna-debug.log
-.github
+gcloud.json
