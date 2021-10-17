@@ -52,4 +52,4 @@ jobs:
       - name: Publish to Artifact Registry
         run: |
           lerna ls
-          npx lerna publish from-git --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
+          npx lerna publish --no-git-reset --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
