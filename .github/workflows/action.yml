@@ -23,8 +23,6 @@ jobs:
         run: |
           echo $CLOUD_DATA > gcloud.json
           gcloud auth activate-service-account --key-file gcloud.json
-          gcloud auth list
-          lerna -v
         env:
           CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
 
@@ -35,7 +33,6 @@ jobs:
           echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:always-auth=true >> .npmrc
 
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
-          cat .npmrc
         # npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
         # env:
           # REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -51,5 +48,4 @@ jobs:
 
       - name: Publish to Artifact Registry
         run: |
-          lerna ls
           npx lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
