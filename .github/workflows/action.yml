@@ -54,7 +54,9 @@ jobs:
         run: |
           npx lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
 
-      - name: Show GitHub ref
+      - name : GITHUB CONTEXT
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
 
       # - name: Publish to Artifact Registry (docker)
