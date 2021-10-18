@@ -58,7 +58,7 @@ jobs:
         run: echo "$GITHUB_REF"
 
       - name: Show GitHub ref
-        run: echo "$GITHUB_REF:10"
+        run: echo ${{ github.event.commits[0].message }}
 
       - name: Publish to Artifact Registry (docker)
         run: |
