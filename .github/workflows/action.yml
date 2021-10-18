@@ -54,17 +54,10 @@ jobs:
         run: |
           npx lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
 
-      # - name: Publish to Artifact Registry (docker)
-      #   run: |
-      #     docker build -t us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:1.0 .
-      #     docker push us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:1.0
-      
-      - name: "Check commit info"
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Set env
+        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
 
-      - name: Check commit info
-        env:
-          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+      - name: Publish to Artifact Registry (docker)
         run: |
-          echo $RELEASE_VERSION
-          echo ${{ steps.vars.outputs.tag }}
+          docker build -t us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:$RELEASE_VERSION .
+          docker push us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:$RELEASE_VERSION
