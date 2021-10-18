@@ -58,3 +58,13 @@ jobs:
         run: |
           docker build -t us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:1.0 .
           docker push us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:1.0
+      
+      - name: "Check commit info"
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
+      - name: Check commit info
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ steps.vars.outputs.tag }}
