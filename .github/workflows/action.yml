@@ -54,8 +54,11 @@ jobs:
         run: |
           npx lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
 
-      - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+      - name: Show GitHub ref
+        run: echo "$GITHUB_REF"
+
+      - name: Show GitHub ref
+        run: echo "$GITHUB_REF"
 
       - name: Publish to Artifact Registry (docker)
         run: |
