@@ -29,13 +29,14 @@ jobs:
         env:
           CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
 
-      - name: Authenticate with Registry
+      - name: Authenticate with Artifact Registry
         run: |
-          echo registry=https://us-npm.pkg.dev/crack-linker-326904/our-registry/ > .npmrc
+          echo @SCOPE:registry=https://us-npm.pkg.dev/crack-linker-326904/our-registry/ > .npmrc
           echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:_authToken="" >> .npmrc
           echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:always-auth=true >> .npmrc
 
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
+          gcloud auth configure-docker us-central1-docker.pkg.dev
         # npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
         # env:
           # REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -49,6 +50,11 @@ jobs:
       #     git commit -m "new version commit"
       #     git push origin master
 
-      - name: Publish to Artifact Registry
+      - name: Publish to Artifact Registry (npm)
         run: |
           npx lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
+
+      - name: Publish to Artifact Registry (docker)
+        run: |
+          docker build -t us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:1.0 .
+          docker push us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:1.0
