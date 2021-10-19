@@ -7,6 +7,9 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     apps: ["common", "server"]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -37,32 +40,48 @@ jobs:
 
           npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
           gcloud auth configure-docker us-central1-docker.pkg.dev
-        # npm whoami --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/
-        # env:
-          # REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
-          # REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
-          # REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-          # NPMRC: ${{ secrets.NPMRC }}
-      
-      # - name: commit
-      #   run: |
-      #     git add .
-      #     git commit -m "new version commit"
-      #     git push origin master
+
 
       - name: Publish to Artifact Registry (npm)
         run: |
           npx lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
 
       - name: get version
-        id: version
+        id: package-version-common
         uses: notiz-dev/github-action-json-property@release
         with: 
-          path: './package.json'
-          prop_path: 'workspaces'
-      - run: echo ${{ steps.version.outputs.prop }} 
+          path: './packages/common/package.json'
+          prop_path: 'version'
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./dockerfile
+          target: common
+          push: true
+          tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/common:${{ steps.package-version-common.outputs.prop  }}
+
+      
+      - name: get version
+        id: package-version-server
+        uses: notiz-dev/github-action-json-property@release
+        with: 
+          path: './packages/server/package.json'
+          prop_path: 'version'
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./dockerfile
+          target: common
+          push: true
+          tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/server:${{ steps.package-version-server.outputs.prop  }}
+
 
       # - name: Publish to Artifact Registry (docker)
       #   run: |
       #     docker build -t us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:$RELEASE_VERSION .
       #     docker push us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:$RELEASE_VERSION
+      
