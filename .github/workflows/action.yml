@@ -32,6 +32,7 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
+
       # - name: Login Google Cloud
       #   run: |
       #     echo $CLOUD_DATA > gcloud.json
