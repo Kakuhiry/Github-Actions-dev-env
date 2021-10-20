@@ -16,21 +16,28 @@ jobs:
         with:
           fetch-depth: "0"
 
-      - name: Git Identity
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kakuhiry/lerna-test
-         # git fetch --depth=0 origin +refs/tags/*:refs/tags/*
+      # - name: Git Identity
+      #   run: |
+      #     git config --global user.name 'github-actions[bot]'
+      #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      #     git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kakuhiry/lerna-test
+      #    # git fetch --depth=0 origin +refs/tags/*:refs/tags/*
         env:
           GITHUB_TOKEN: ${{ secrets.PTA }}
 
-      - name: Login Google Cloud
-        run: |
-          echo $CLOUD_DATA > gcloud.json
-          gcloud auth activate-service-account --key-file gcloud.json
-        env:
-          CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      # - name: Login Google Cloud
+      #   run: |
+      #     echo $CLOUD_DATA > gcloud.json
+      #     gcloud auth activate-service-account --key-file gcloud.json
+      #   env:
+      #     CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
 
       - name: Authenticate with Artifact Registry
         run: |
