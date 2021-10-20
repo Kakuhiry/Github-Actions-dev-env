@@ -22,8 +22,8 @@ jobs:
       #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
       #     git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kakuhiry/lerna-test
       #    # git fetch --depth=0 origin +refs/tags/*:refs/tags/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.PTA }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.PTA }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
