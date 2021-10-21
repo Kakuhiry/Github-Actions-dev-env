@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: "0"
-          
+
       - name: get version
         id: package-version
         uses: notiz-dev/github-action-json-property@release
@@ -48,7 +48,7 @@ jobs:
           file: ./dockerfile
           target: common
           push: true
-          tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/${{ matrix.apps }}:${{ steps.package-version-common.outputs.prop  }}
+          tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/${{ matrix.apps }}:${{ steps.package-version.outputs.prop  }}
 
       # - name: Publish to Artifact Registry (docker)
       #   run: |
