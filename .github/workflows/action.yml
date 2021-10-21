@@ -4,27 +4,10 @@ on:
       - master
 
 jobs:
-  publish:
-    name: Publish
+  auth:
+    name: Authenticate
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     apps: ["common", "server"]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: "0"
-
-      # - name: Git Identity
-      #   run: |
-      #     git config --global user.name 'github-actions[bot]'
-      #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      #     git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Kakuhiry/lerna-test
-      #    # git fetch --depth=0 origin +refs/tags/*:refs/tags/*
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.PTA }}
-
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -32,34 +15,30 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-
-      # - name: Login Google Cloud
-      #   run: |
-      #     echo $CLOUD_DATA > gcloud.json
-      #     gcloud auth activate-service-account --key-file gcloud.json
-      #   env:
-      #     CLOUD_DATA: ${{ secrets.GCP_KEY_FILE }}
-
       - name: Authenticate with Artifact Registry
         run: |
-          echo @SCOPE:registry=https://us-npm.pkg.dev/crack-linker-326904/our-registry/ > .npmrc
-          echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:_authToken="" >> .npmrc
-          echo //us-npm.pkg.dev/crack-linker-326904/our-registry/:always-auth=true >> .npmrc
+          echo $NPMRC > .npmrc
 
-          npx google-artifactregistry-auth --repo-config .npmrc --credential-config .npmrc
-          gcloud auth configure-docker us-central1-docker.pkg.dev
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
 
+  
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        apps: ["common", "server"]
 
-      - name: Publish to Artifact Registry (npm)
-        run: |
-          npx lerna publish --cd-version patch --registry https://us-npm.pkg.dev/crack-linker-326904/our-registry/ --yes
-
+    steps:
       - name: get version
-        id: package-version-common
+        id: package-version
         uses: notiz-dev/github-action-json-property@release
-        with: 
-          path: './packages/common/package.json'
-          prop_path: 'version'
+        with:
+          path: "./packages/${{ matrix.apps }}/package.json"
+          prop_path: "version"
 
       - name: Build and push
         uses: docker/build-push-action@v2
@@ -68,28 +47,9 @@ jobs:
           file: ./dockerfile
           target: common
           push: true
-          tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/common:${{ steps.package-version-common.outputs.prop  }}
-
-      
-      - name: get version
-        id: package-version-server
-        uses: notiz-dev/github-action-json-property@release
-        with: 
-          path: './packages/server/package.json'
-          prop_path: 'version'
-
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./dockerfile
-          target: common
-          push: true
-          tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/server:${{ steps.package-version-server.outputs.prop  }}
-
+          tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/${{ matrix.apps }}:${{ steps.package-version-common.outputs.prop  }}
 
       # - name: Publish to Artifact Registry (docker)
       #   run: |
       #     docker build -t us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:$RELEASE_VERSION .
       #     docker push us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:$RELEASE_VERSION
-      
