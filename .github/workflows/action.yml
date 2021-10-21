@@ -4,23 +4,6 @@ on:
       - master
 
 jobs:
-  auth:
-    name: Authenticate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
-
-      - name: Authenticate with Artifact Registry
-        run: |
-          echo $NPMRC > .npmrc
-
-
-  
   publish:
     name: Publish
     runs-on: ubuntu-latest
@@ -33,6 +16,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: "0"
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Authenticate with Artifact Registry
+        run: |
+          echo $NPMRC > .npmrc
 
       - name: get version
         id: package-version
