@@ -21,7 +21,7 @@ jobs:
         id: gCloud-auth
         uses: google-github-actions/setup-gcloud@master
         with:
-          project_id: ${{ secrets.GCP_PROJECT_I }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
@@ -49,15 +49,15 @@ jobs:
           lerna version minor --yes
         if: ${{ contains( github.event.head_commit.message, 'minor') }}
 
-      - name: bump patch
-        run: |
-          lerna version patch --yes
-        if: steps.bump-major.outcome == 'skipped' && steps.bump-minor.outcome == 'skipped'
+      # - name: bump patch
+      #   run: |
+      #     lerna version patch --yes
+      #   if: steps.bump-major.outcome == 'skipped' && steps.bump-minor.outcome == 'skipped'
 
       - name: step dependency test
         run: |
           echo "THIS IS DEPENDENT"
-        if: steps.gCloud-auth.outcome == 'success'
+        if: steps.bump-major.outcome == 'success'
       # - name: Build and push
       #   uses: docker/build-push-action@v2
       #   with:
