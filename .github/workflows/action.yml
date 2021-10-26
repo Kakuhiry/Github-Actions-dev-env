@@ -36,14 +36,22 @@ jobs:
           path: "./packages/${{ matrix.apps }}/package.json"
           prop_path: "version"
 
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./dockerfile
-          target: common
-          push: true
-          tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/${{ matrix.apps }}:${{ steps.package-version.outputs.prop  }}
+      - name: bump major
+        id: bump-major
+        run: |
+          lerna version major --yes
+        if: ${{ contains(${{ github.event.head_commit.message }}, 'major') }}
+
+
+      # - name: Build and push
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     file: ./dockerfile
+      #     target: common
+      #     push: true
+      #     tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/${{ matrix.apps }}:${{ steps.package-version.outputs.prop  }}
+
 
       # - name: Publish to Artifact Registry (docker)
       #   run: |
