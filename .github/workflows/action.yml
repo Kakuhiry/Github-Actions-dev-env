@@ -57,7 +57,7 @@ jobs:
       - name: step dependency test
         run: |
           echo "THIS IS DEPENDENT"
-        if: steps.bump-major.outcome == 'success'
+        if: steps.package-version.outcome == 'success'
       # - name: Build and push
       #   uses: docker/build-push-action@v2
       #   with:
