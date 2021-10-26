@@ -42,6 +42,17 @@ jobs:
           lerna version major --yes
         if: ${{ contains( github.event.head_commit.message, 'major') }}
 
+      - name: bump minor
+        id: bump-minor
+        run: |
+          lerna version minor --yes
+        if: ${{ contains( github.event.head_commit.message, 'minor') }}
+
+      - name: bump patch
+        run: |
+          lerna version patch --yes
+        if: steps.bump-major.outcome == 'skipped' && steps.bump-minor.outcome == 'skipped'
+
 
       # - name: Build and push
       #   uses: docker/build-push-action@v2
