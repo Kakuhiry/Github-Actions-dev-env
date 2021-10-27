@@ -42,6 +42,9 @@ jobs:
           path: "./packages/${{ matrix.apps }}/package.json"
           prop_path: "version"
 
+      - name: get route
+        run: pwd
+
       - name: bump major
         id: bump-major
         run: |
@@ -58,9 +61,6 @@ jobs:
         run: |
           lerna version patch --yes
         if: steps.bump-major.outcome == 'skipped' && steps.bump-minor.outcome == 'skipped'
-
-      - name: get route
-        run: pwd
 
       - name: Publish to Bucket
         run: |
