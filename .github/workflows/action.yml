@@ -48,11 +48,11 @@ jobs:
 
       - name: echo route
         id: route-echo
-        run: ${{steps.route.outputs.prop}}
+        run: echo ${{steps.route.outputs.prop}}
 
       - name: echo route alt
         id: route-
-        run: ${{steps.route.outputs}}
+        run: echo ${{steps.route.outputs}}
 
       - name: bump major
         id: bump-major
