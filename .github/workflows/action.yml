@@ -65,8 +65,8 @@ jobs:
 
       - name: Publish to Bucket
         run: |
-          tar -czvf ${{ matrix.apps }}-${{ steps.package-version.outputs.prop }}.tar.gz --absolute-names /home/runner/work/lerna-test/lerna-test/packages/${{ matrix.apps }}/**
-          gsutil cp $pwd/${{ matrix.apps }}:${{ steps.package-version.outputs.prop }}.tar.gz gs://first-testing-bucket/
+          tar -czvf ${{ matrix.apps }}-${{ steps.package-version.outputs.prop }}.tar.gz --absolute-names ./packages/${{ matrix.apps }}/**
+          gsutil cp ./${{ matrix.apps }}-${{ steps.package-version.outputs.prop }}.tar.gz gs://first-testing-bucket/
 
       - name: Build and push
         uses: docker/build-push-action@v2
