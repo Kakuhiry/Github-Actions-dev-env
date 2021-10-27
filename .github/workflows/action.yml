@@ -17,11 +17,6 @@ jobs:
         with:
           fetch-depth: "0"
 
-      - name: indemnify on git
-        run: |
-          git config --global user.email "CI@CI.com"
-          git config --global user.name "CI"
-
       - name: Set up Cloud SDK
         id: gCloud-auth
         uses: google-github-actions/setup-gcloud@master
@@ -29,6 +24,11 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
+
+      - name: indemnify on git
+        run: |
+          git config --global user.email "CI@CI.com"
+          git config --global user.name "CI"
 
       - name: Authenticate with Artifact Registry
         run: |
@@ -47,14 +47,14 @@ jobs:
         run: echo bump version or something
         # run: |
         #   lerna version major --yes
-        if: contains( github.event.head_commit.message, major ) && steps.bump-minor.outcome == 'skipped'
+        if: ${{ contains( github.event.head_commit.message, '[(M|m)ajor]') }} && steps.bump-minor.outcome == 'skipped'
 
       - name: bump minor
         id: bump-minor
         run: echo bump version or something
         # run: |
           # lerna version minor --yes
-        if: contains( github.event.head_commit.message, minor) && steps.bump-major.outcome == 'skipped'
+        if: ${{ contains( github.event.head_commit.message, '[(M|m)inor]') }} && steps.bump-major.outcome == 'skipped'
  
       - name: bump patch
         run: echo patch
