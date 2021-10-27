@@ -69,7 +69,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile.production
+          file: ./dockerfile
           target: ${{ matrix.apps }}
           push: true
           tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/${{ matrix.apps }}:${{ steps.package-version.outputs.prop }}
