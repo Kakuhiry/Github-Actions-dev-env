@@ -47,11 +47,11 @@ jobs:
         run: pwd
 
       - name: echo route
-        id: route
+        id: route-echo
         run: ${{steps.route.outputs.prop}}
 
       - name: echo route alt
-        id: route
+        id: route-
         run: ${{steps.route.outputs}}
 
       - name: bump major
