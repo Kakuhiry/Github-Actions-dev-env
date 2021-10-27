@@ -65,7 +65,7 @@ jobs:
 
       - name: Publish to Bucket
         run: |
-          tar -czvf ${{ matrix.apps }}-${{ steps.package-version.outputs.prop }}.tar.gz --absolute-names ./packages/${{ matrix.apps }}/**
+          tar -czvf ${{ matrix.apps }}-${{ steps.package-version.outputs.prop }}.tar.gz ./packages/${{ matrix.apps }}/**
           gsutil cp ./${{ matrix.apps }}-${{ steps.package-version.outputs.prop }}.tar.gz gs://first-testing-bucket/
 
       - name: Build and push
