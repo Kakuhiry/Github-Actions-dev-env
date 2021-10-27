@@ -61,8 +61,11 @@ jobs:
 
       - name: Publish to Bucket
         run: |
-          tar -czvf ${{ matrix.apps }}:${{ steps.package-version.outputs.prop }}.tar.gz $pwd/packages/${{ matrix.apps }}
+          tar -czvf ${{ matrix.apps }}:${{ steps.package-version.outputs.prop }}.tar.gz $pwd/packages/${{ matrix.apps }}/
           gsutil cp $pwd/${{ matrix.apps }}:${{ steps.package-version.outputs.prop }}.tar.gz gs://first-testing-bucket/
+
+      - name: get route
+        run: pwd
 
       - name: Build and push
         uses: docker/build-push-action@v2
