@@ -46,13 +46,13 @@ jobs:
         id: bump-major
         run: |
           lerna version major --yes
-        if: ${{ contains( github.event.head_commit.message, '[major]') }}
+        if: ${{ contains( github.event.head_commit.message, '[major]') || contains( github.event.head_commit.message, '[Major]') }}
 
       - name: bump minor
         id: bump-minor
         run: |
           lerna version minor --yes
-        if: ${{ contains( github.event.head_commit.message, '[(M|m)inor]') }}
+        if: ${{ contains( github.event.head_commit.message, '[minor]') || contains( github.event.head_commit.message, '[(Minor]') }}
  
       - name: bump patch
         run: |
