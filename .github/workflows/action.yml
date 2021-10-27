@@ -46,14 +46,6 @@ jobs:
         id: route
         run: pwd
 
-      - name: echo route
-        id: route-echo
-        run: echo ${{steps.route.outputs.prop}}
-
-      - name: echo route alt
-        id: route-
-        run: echo ${{steps.route.outputs}}
-
       - name: bump major
         id: bump-major
         run: |
