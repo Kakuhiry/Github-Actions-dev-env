@@ -47,7 +47,6 @@ jobs:
         run: |
           lerna version major --yes
         if: ${{ contains( github.event.head_commit.message, '[(M|m)ajor]') }}
-        
 
       - name: bump minor
         id: bump-minor
