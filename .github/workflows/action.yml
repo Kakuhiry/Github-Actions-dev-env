@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        run: |
+          git config --global user.email "CI@CI.com"
+          git config --global user.name "CI"
         with:
           fetch-depth: "0"
 
@@ -42,19 +45,20 @@ jobs:
         run: echo bump version or something
         # run: |
         #   lerna version major --yes
-        if: ${{ contains( github.event.head_commit.message, 'major') }}
+        if: contains( github.event.head_commit.message, [(M|m)ajor]) && steps.bump-minor.outcome == 'skipped'
 
       - name: bump minor
         id: bump-minor
         run: echo bump version or something
         # run: |
           # lerna version minor --yes
-        if: ${{ contains( github.event.head_commit.message, 'minor') }}
-
-      # - name: bump patch
-      #   run: |
-      #     lerna version patch --yes
-      #   if: steps.bump-major.outcome == 'skipped' && steps.bump-minor.outcome == 'skipped'
+        if: contains( github.event.head_commit.message, [(M|m)inor]) && steps.bump-major.outcome == 'skipped'
+ 
+      - name: bump patch
+        run: echo patch
+        # run: |
+        #   lerna version patch --yes
+        if: steps.bump-major.outcome == 'skipped' && steps.bump-minor.outcome == 'skipped'
 
       - name: step dependency test
         run: |
