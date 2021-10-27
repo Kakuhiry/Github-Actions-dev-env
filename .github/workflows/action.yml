@@ -61,7 +61,7 @@ jobs:
       - name: bump patch
         run: |
           lerna version patch --yes
-        if: steps.bump-major.outcome == 'skipped' && steps.bump-minor.outcome == 'skipped' && ${{ matrix.apps }} == 'common'
+        if: steps.bump-major.outcome == 'skipped' && steps.bump-minor.outcome == 'skipped' && matrix.apps != 'common'
 
       - name: Publish to Bucket
         run: |
