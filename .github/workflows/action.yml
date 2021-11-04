@@ -17,6 +17,15 @@ jobs:
         with:
           fetch-depth: "0"
 
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '14'
+      #     cache: 'npm'
+
+      - name: install deps
+        run: |
+          npm install
+
       - name: Set up Cloud SDK
         id: gCloud-auth
         uses: google-github-actions/setup-gcloud@master

@@ -5,6 +5,10 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.22.0",
+    "express": "^4.17.1",
+    "graphql-yoga": "^1.18.3",
+    "lodash": "^4.17.21",
+    "type-graphql": "^1.1.1",
     "ua-parser": "^0.3.5"
   },
   "gitHead": "c8e39b3b023c1c810c569cb540738f1b987d0942"
