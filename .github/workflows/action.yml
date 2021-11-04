@@ -17,10 +17,10 @@ jobs:
         with:
           fetch-depth: "0"
 
-      # - uses: actions/setup-node@v2
-      #   with:
-      #     node-version: '14'
-      #     cache: 'npm'
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
 
       - name: install deps
         run: |
