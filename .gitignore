@@ -5,3 +5,4 @@ commands.sh
 lerna-debug.log
 lerna-debug.log
 gcloud.json
+package-lock.json

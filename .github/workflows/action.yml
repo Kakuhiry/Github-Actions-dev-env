@@ -17,6 +17,7 @@ jobs:
         with:
           fetch-depth: "0"
       
+      
       - name: branch
         run: echo ${GITHUB_REF##*/}
 
@@ -108,3 +109,12 @@ jobs:
       #   run: |
       #     docker build -t us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:$RELEASE_VERSION .
       #     docker push us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/lerna-test:$RELEASE_VERSION
+  XD:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        apps:
+          ${{ jobs.publish.strategy.matrix }}
+    steps:
+      - name: echo
+        run: echo ${{ matrix.apps }}
