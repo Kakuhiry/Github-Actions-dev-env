@@ -114,7 +114,7 @@ jobs:
     strategy:
       matrix: 
         apps:
-          ${{ needs.publish.strategy.matrix }}
+          ${{ publish.strategy.matrix }}
     steps:
       - name: echo
         run: echo ${{ matrix.apps }}
