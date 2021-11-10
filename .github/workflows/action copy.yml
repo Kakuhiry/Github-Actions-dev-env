@@ -28,9 +28,7 @@ jobs:
 
       - name: stash changes
         run: |
-         git add package-lock.json
-         git stash --keep-index
-         git reset
+         git stash
 
       - name: bump patch
         run: |
