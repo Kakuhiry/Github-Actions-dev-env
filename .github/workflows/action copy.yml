@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        apps: ["common", "server"]
+        apps: ["server"]
 
     steps:
       - name: Checkout
