@@ -27,7 +27,10 @@ jobs:
           git config --global user.name "CI"
 
       - name: stash changes
-        run: git stash package-lock.json
+        run: |
+         git add package-lock.json
+         git stash --keep-index
+         git reset
 
       - name: bump patch
         run: |
