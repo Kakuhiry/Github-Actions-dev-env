@@ -18,11 +18,21 @@ jobs:
           fetch-depth: "0"
           ref: 'new-version'
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Auth on git
         run: |
           git config --global user.email "CI@CI.com"
           git config --global user.name "CI"
-          
+
+      - name: bump patch
+        run: |
+          lerna changed
+      
+      - name: bump patch
+        run: |
+          lerna version patch --yes
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
