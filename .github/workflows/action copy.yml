@@ -19,7 +19,7 @@ jobs:
           ref: 'new-version'
 
       - name: Merge
-        run: git merge master
+        run: git merge origin/master
 
       - name: Install dependencies
         run: npm install
