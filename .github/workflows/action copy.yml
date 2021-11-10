@@ -43,7 +43,7 @@ jobs:
         with:
           title: "New version"
           branch: master
-          delete-branch: true
+          # delete-branch: true
 
 
       # - name: bump major
