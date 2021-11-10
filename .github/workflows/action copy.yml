@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - new-version
 
 jobs:
   publish:
