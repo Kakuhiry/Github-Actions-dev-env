@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - new-version
+      - master
 
 jobs:
   publish:
@@ -17,6 +17,9 @@ jobs:
         with:
           fetch-depth: "0"
           ref: 'new-version'
+
+      - name: Merge
+        run: git merge master
 
       - name: Install dependencies
         run: npm install
