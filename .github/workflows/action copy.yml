@@ -12,19 +12,23 @@ jobs:
         apps: ["server"]
 
     steps:
+      - name: Auth on git
+        run: |
+          git config --global user.email "CI@CI.com"
+          git config --global user.name "CI"
+          
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: "0"
           ref: 'new-version'
 
+      - name: Merge
+        run: git merge origin/master
+
       - name: Install dependencies
         run: npm install
 
-      - name: Auth on git
-        run: |
-          git config --global user.email "CI@CI.com"
-          git config --global user.name "CI"
 
       - name: stash changes
         run: |
@@ -42,6 +46,7 @@ jobs:
         uses: vsoch/pull-request-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST_FROM_BRANCH: 'new-version'
           PULL_REQUEST_BRANCH: "master"
 
 
