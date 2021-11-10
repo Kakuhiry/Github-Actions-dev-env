@@ -42,7 +42,6 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           title: "New version"
-          base: new-version
           branch: master
           delete-branch: true
 
