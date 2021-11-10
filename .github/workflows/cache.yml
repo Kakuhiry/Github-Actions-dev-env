@@ -37,13 +37,8 @@ jobs:
         id: filter
         with:
           filters: |
-            package-json:
+            ${{ matrix.apps }}:
               - './apps/${{ matrix.apps }}/package.json'
-
-      - name: Install dependencies
-        id: install-dependencies
-        run: npm install --saveDev
-        if: steps.filter.outcome.package-json != 'true'
 
       - uses: actions/cache@v2
         id: node_modules-cache
@@ -60,3 +55,10 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
         if: steps.install-dependencies.outcome == 'true'
+
+      - name: Install dependencies
+        id: install-dependencies
+        run: npm install --saveDev
+        if: steps.filter.outcome.${{ matrix.apps }} != 'true'
+
+    

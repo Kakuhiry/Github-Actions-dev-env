@@ -114,7 +114,7 @@ jobs:
     strategy:
       matrix: 
         apps:
-          ${{ jobs.publish.matrix.apps }}
+          ${{ jobs.backenmatrix.apps }}
     steps:
       - name: echo
         run: echo ${{ matrix.apps }}
