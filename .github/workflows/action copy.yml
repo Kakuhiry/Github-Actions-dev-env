@@ -12,6 +12,11 @@ jobs:
         apps: ["server"]
 
     steps:
+      - name: Auth on git
+        run: |
+          git config --global user.email "CI@CI.com"
+          git config --global user.name "CI"
+          
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -24,10 +29,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Auth on git
-        run: |
-          git config --global user.email "CI@CI.com"
-          git config --global user.name "CI"
 
       - name: stash changes
         run: |
