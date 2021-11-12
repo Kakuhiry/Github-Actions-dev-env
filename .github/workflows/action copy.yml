@@ -26,9 +26,9 @@ jobs:
     if: ${{ needs.changes.outputs.packages != '[]' && needs.changes.outputs.packages != '' }}
     name: Publish
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        apps: ${{ fromJSON(needs.changes.outputs.packages) }}
+    # strategy:
+    #   matrix:
+    #     apps: ${{ fromJSON(needs.changes.outputs.packages) }}
 
     steps:
       # - uses: dorny/paths-filter@v2
@@ -59,6 +59,9 @@ jobs:
       - name: bump patch
         run: |
           lerna version patch --yes
+
+      - name: stash changes
+        run: git stash
 
       - name: pull-request-action
         uses: vsoch/pull-request-action@master
