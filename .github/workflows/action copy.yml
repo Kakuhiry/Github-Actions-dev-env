@@ -20,6 +20,8 @@ jobs:
           server: packages/server/*
 
   publish:
+    needs: changes
+    if: ${{ needs.changes.outputs.packages != '[]' && needs.changes.outputs.packages != '' }}
     name: Publish
     runs-on: ubuntu-latest
     strategy:
