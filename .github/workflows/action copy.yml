@@ -56,12 +56,13 @@ jobs:
       - name: Install dependencies
         run: npm install
       
+      - name: stash changes
+        run: git stash
+        
       - name: bump patch
         run: |
           lerna version patch --yes
 
-      - name: stash changes
-        run: git stash
 
       - name: pull-request-action
         uses: vsoch/pull-request-action@master
