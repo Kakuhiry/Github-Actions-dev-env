@@ -6,19 +6,16 @@ on:
 jobs:
   changes:
     runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'packages' output variable
+      packages: ${{ steps.filter.outputs.changes }}
     steps:
-    - uses: actions/checkout@v2
-
     # For pull requests it's not necessary to checkout the code
     - uses: dorny/paths-filter@v2
       id: filter
       with:
         filters: |
-          server:
-            - 'packages/server/**'
-    outputs:
-      # Expose matched filters as job 'packages' output variable
-      packages: ${{ steps.filter.outputs.changes }}
+          server: packages/server/*
 
   publish:
     name: Publish
