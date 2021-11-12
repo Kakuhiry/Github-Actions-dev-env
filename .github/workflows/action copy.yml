@@ -23,7 +23,7 @@ jobs:
 
       - name: echo - ${{ matrix.apps }}
         run: echo ${{ matrix.apps }}
-        if: steps.filter.outputs.${{ matrix.apps }} == true
+        if: steps.filter.outputs.server == true
 
       # - name: Auth on git
       #   run: |
