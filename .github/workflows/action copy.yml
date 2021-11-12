@@ -6,9 +6,6 @@ on:
 jobs:
   changes:
     runs-on: ubuntu-latest
-    outputs:
-      # Expose matched filters as job 'packages' output variable
-      packages: ${{ steps.filter.outputs.changes }}
     steps:
     - uses: actions/checkout@v2
 
@@ -19,6 +16,9 @@ jobs:
         filters: |
           server:
             - 'packages/server/**'
+    outputs:
+      # Expose matched filters as job 'packages' output variable
+      packages: ${{ steps.filter.outputs.changes }}
 
   publish:
     name: Publish
