@@ -4,14 +4,41 @@ on:
       - master
 
 jobs:
+  changes:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'packages' output variable
+      packages: ${{ steps.filter.outputs.changes }}
+    steps:
+    - uses: actions/checkout@v2
+
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          server: packages/server/*
+          common: packages/common/*
+
   publish:
+    needs: changes
+    if: ${{ needs.changes.outputs.packages != '[]' && needs.changes.outputs.packages != '' }}
     name: Publish
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        apps: ["server"]
+        apps: ${{ fromJSON(needs.changes.outputs.packages) }}
 
     steps:
+      # - uses: dorny/paths-filter@v2
+      #   id: filter
+      #   with:
+      #     filters: |
+      #       ${{ matrix.apps }}:
+      #         - 'packages/${{ matrix.apps }}/**'
+
+
       - name: Auth on git
         run: |
           git config --global user.email "CI@CI.com"
@@ -77,10 +104,11 @@ jobs:
       #     tags: us-central1-docker.pkg.dev/crack-linker-326904/quickstart-docker-repo/${{ matrix.apps }}:${{ steps.package-version.outputs.prop }}
         
 
-      - name: step dependency test
-        run: |
-          echo "THIS IS DEPENDENT"
-        if: steps.package-version.outcome == 'success'
+      # - name: step dependency test
+      #   run: |
+      #     echo "THIS IS DEPENDENT"
+      #   if: steps.package-version.outcome == 'success'
+
       # - name: Build and push
       #   uses: docker/build-push-action@v2
       #   with:
