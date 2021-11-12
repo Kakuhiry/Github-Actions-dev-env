@@ -18,6 +18,7 @@ jobs:
       with:
         filters: |
           server: packages/server/*
+          common: packages/common/*
 
   publish:
     needs: changes
