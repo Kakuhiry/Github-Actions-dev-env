@@ -51,17 +51,19 @@ jobs:
           ref: 'new-version'
 
       - name: Merge
-        run: git pull
-
-      - name: Merge
-        run: git merge origin/master
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: bump patch
         run: |
-          lerna changed
+          echo 'a' > txs
+          echo 'a' >> txs
+
+      # - name: Merge
+      #   run: git merge origin/master
+
+      # - name: Install dependencies
+      #   run: npm install
+
+      # - name: bump patch
+      #   run: |
+      #     lerna changed
       
       # - name: bump patch
       #   run: |
