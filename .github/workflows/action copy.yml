@@ -5,7 +5,7 @@ on:
 
 jobs:
   changes:
-    # if: ${{ github.actor != 'dependabot[bot]' }}
+    if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     outputs:
       # Expose matched filters as job 'packages' output variable
@@ -56,12 +56,12 @@ jobs:
       - name: Install dependencies
         run: npm install
       
-      - name: stash changes
-        run: git stash
+      # - name: stash changes
+      #   run: git stash
         
-      - name: bump patch
-        run: |
-          lerna version patch --yes
+      # - name: bump patch
+      #   run: |
+      #     lerna version patch --yes
 
       - name: pull-request-action
         uses: vsoch/pull-request-action@master
