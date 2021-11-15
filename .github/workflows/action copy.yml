@@ -5,7 +5,7 @@ on:
 
 jobs:
   changes:
-    if: github.event.commits[0].author.name != 'YA'
+    # if: github.event.commits[0].author.name != 'YA'
     runs-on: ubuntu-latest
     outputs:
       # Expose matched filters as job 'packages' output variable
