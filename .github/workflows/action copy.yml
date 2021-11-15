@@ -62,7 +62,6 @@ jobs:
 
       - name: Merge
         run: |
-          echo 'a' > txs
           echo 'a' >> txs
       
       - name: commit
