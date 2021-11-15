@@ -51,6 +51,9 @@ jobs:
           ref: 'new-version'
 
       - name: Merge
+        run: git pull
+
+      - name: Merge
         run: git merge origin/master
 
       - name: Install dependencies
@@ -60,16 +63,16 @@ jobs:
         run: |
           lerna changed
       
-      - name: bump patch
-        run: |
-          lerna version patch --yes
+      # - name: bump patch
+      #   run: |
+      #     lerna version patch --yes
 
       - name: pull-request-action
         uses: vsoch/pull-request-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST_FROM_BRANCH: 'new-version'
-          PULL_REQUEST_BRANCH: "master"
+          PULL_REQUEST_BRANCH: 'master'
 
 
       # - name: bump major
