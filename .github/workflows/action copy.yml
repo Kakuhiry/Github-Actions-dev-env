@@ -16,6 +16,11 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
 
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github.event.commits[0].author.name) }}
+      run: echo "$GITHUB_CONTEXT"
+
     - name: echo ${{ github.actor }}
       run: | 
         echo ${{ github.actor == 'dependabot[bot]' }}
