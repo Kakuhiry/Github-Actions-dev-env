@@ -55,6 +55,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: bump patch
+        run: |
+          lerna changed
       
       # - name: stash changes
       #   run: git stash
