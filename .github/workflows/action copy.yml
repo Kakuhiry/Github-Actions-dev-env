@@ -11,6 +11,11 @@ jobs:
       # Expose matched filters as job 'packages' output variable
       packages: ${{ steps.filter.outputs.changes }}
     steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
     - name: echo ${{ github.actor }}
       run: | 
         echo ${{ github.actor == 'dependabot[bot]' }}
