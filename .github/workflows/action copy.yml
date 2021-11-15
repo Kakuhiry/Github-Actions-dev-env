@@ -59,6 +59,13 @@ jobs:
         run: |
           echo 'a' > txs
           echo 'a' >> txs
+      
+      - name: commit
+        run: |
+          git config --global user.name 'YA'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git commit -am "Automated commit"
+          git push
 
       # - name: Merge
       #   run: git merge origin/master
