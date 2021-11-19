@@ -3,6 +3,7 @@
     "packages/*"
   ],
   "version": "independent",
+  "useWorkspaces": true,
   "publishConfig": {
     "registry": "http://localhost:4873/"
   }
