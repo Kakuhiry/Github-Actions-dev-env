@@ -45,4 +45,4 @@ jobs:
 #           sarif_file: results.sarif
           
       - name: Show sarif
-        run: cat results.sarif
+        run: cat ${{ toJSON(results.sarif) }}
