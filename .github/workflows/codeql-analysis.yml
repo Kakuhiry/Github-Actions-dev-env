@@ -38,11 +38,11 @@ jobs:
         repository: curbo/Curbo-Backend
         token: ${{ secrets.PAT }}
 
-    - name: ls
-      run: ls
+    # - name: ls
+    #   run: ls
 
-    - name: Change directory
-      run: cd Curbo-Backend
+    # - name: Change directory
+    #   run: cd Curbo-Backend
 
     - name: Checkout repository
       uses: actions/checkout@v2
