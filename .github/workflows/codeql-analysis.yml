@@ -38,6 +38,9 @@ jobs:
         repository: curbo/Curbo-Backend
         token: ${{ secrets.PAT }}
 
+    - name: ls
+      run: ls
+
     - name: Change directory
       run: cd Curbo-Backend
 
