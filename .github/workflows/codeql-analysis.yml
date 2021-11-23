@@ -35,7 +35,7 @@ jobs:
     - name: Check out my other private repo
       uses: actions/checkout@master
       with:
-        repository: orgname/reponame
+        repository: curbo/Curbo-Backend
         token: ${{ secrets.PTA }}
 
     - name: Change directory
