@@ -1,0 +1,21 @@
+name: "AppThreat/sast-scan"
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+    - uses: AppThreat/sast-scan-action@master
+      with:
+        type: "nodejs"
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: reports
+        path: reports
