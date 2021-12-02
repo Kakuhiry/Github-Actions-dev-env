@@ -13,11 +13,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - uses: AppThreat/sast-scan-action@master
+#     - uses: AppThreat/sast-scan-action@master
+#       with:
+#         type: "nodejs"
+    - name: nodejsscan scan
+      id: njsscan
+      uses: ajinabraham/njsscan-action@master
       with:
-        type: "nodejs"
+        args: '. --sarif --output results.sarif || true'
 
     - uses: actions/upload-artifact@v1
       with:
-        name: reports
-        path: reports
+        name: Report
+        path: ./results.sarif
