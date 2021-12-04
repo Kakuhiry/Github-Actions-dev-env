@@ -45,5 +45,3 @@ jobs:
 
     - name: MegaLinter
       uses: megalinter/megalinter@v5.2.0
-      with:
-        GITHUB_COMMENT_REPORTER: true
