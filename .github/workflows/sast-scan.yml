@@ -27,18 +27,26 @@ jobs:
 #         name: Report
 #         path: ./results.sarif
 
-    - name: Scan
-      uses: ShiftLeftSecurity/scan-action@master
-      env:
-        VDB_HOME: ${{ github.workspace }}/vdb
-        WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SCAN_AUTO_BUILD: true
-      with:
-        output: reports
+#     - name: Scan
+#       uses: ShiftLeftSecurity/scan-action@master
+#       env:
+#         VDB_HOME: ${{ github.workspace }}/vdb
+#         WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         SCAN_AUTO_BUILD: true
+#       with:
+#         output: reports
 
-    - name: Upload scan reports
-      uses: actions/upload-artifact@v1.0.0
+#     - name: Upload scan reports
+#       uses: actions/upload-artifact@v1.0.0
+#       with:
+#         name: shiftleft-scan-reports
+#         path: reports
+
+    - uses: returntocorp/semgrep-action@v1
       with:
-        name: shiftleft-scan-reports
-        path: reports
+        config: >- # more at semgrep.dev/explore
+          p/security-audit
+          p/secrets
+          p/ci
+          p/owasp-top-ten
