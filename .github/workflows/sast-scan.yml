@@ -43,10 +43,5 @@ jobs:
 #         name: shiftleft-scan-reports
 #         path: reports
 
-    - uses: returntocorp/semgrep-action@v1
-      with:
-        config: >- # more at semgrep.dev/explore
-          p/security-audit
-          p/secrets
-          p/ci
-          p/owasp-top-ten
+- name: MegaLinter
+  uses: megalinter/megalinter@v5.2.0
