@@ -43,5 +43,5 @@ jobs:
 #         name: shiftleft-scan-reports
 #         path: reports
 
-- name: MegaLinter
-  uses: megalinter/megalinter@v5.2.0
+    - name: MegaLinter
+      uses: megalinter/megalinter@v5.2.0
