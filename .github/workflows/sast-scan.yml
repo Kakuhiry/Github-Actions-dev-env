@@ -11,6 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: install
+      run: npm install
+
     - name: Scan
       uses: ShiftLeftSecurity/scan-action@master
       env:
