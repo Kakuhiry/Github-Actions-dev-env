@@ -32,4 +32,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         APPLY_FIXES_MODE: pull_request
-        DISABLE_ERRORS: true
+        # DISABLE_ERRORS: true
