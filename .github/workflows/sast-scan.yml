@@ -1,31 +1,15 @@
 name: "AppThreat/sast-scan"
 
 on:
-  push:
+  pull_request:
     branches: [ master ]
 
 jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
     - uses: actions/checkout@v2
-    
-#     - uses: AppThreat/sast-scan-action@master
-#       with:
-#         type: "nodejs"
-#     - name: nodejsscan scan
-#       id: njsscan
-#       uses: ajinabraham/njsscan-action@master
-#       with:
-#         args: '. --sarif --output results.sarif || true'
-
-#     - uses: actions/upload-artifact@v1
-#       with:
-#         name: Report
-#         path: ./results.sarif
 
     - name: Scan
       uses: ShiftLeftSecurity/scan-action@master
@@ -45,3 +29,6 @@ jobs:
 
     - name: MegaLinter
       uses: megalinter/megalinter@v5.2.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DISABLE_ERRORS: true
