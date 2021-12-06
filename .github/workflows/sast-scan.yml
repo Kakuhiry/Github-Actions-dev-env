@@ -31,4 +31,5 @@ jobs:
       uses: megalinter/megalinter@v5.2.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        APPLY_FIXES_MODE: pull_request
         DISABLE_ERRORS: true
