@@ -22,6 +22,7 @@ jobs:
       with:
         name: Source Code Security Scan Report - ${{ matrix.apps }}
         path: results.sarif
+        
 #     - name: Scan
 #       uses: ShiftLeftSecurity/scan-action@master
 #       env:
