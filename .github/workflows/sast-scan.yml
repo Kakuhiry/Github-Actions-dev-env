@@ -19,15 +19,21 @@ jobs:
     
     - name: ${{ steps.port.outputs.substring }}
       run: echo ${{ steps.port.outputs.substring }}
-        
+     
     - uses: bhowell2/github-substring-action@v1.0.0
       id: service
       with:
-        value: 'api-gateway.4000'
-        index_of_str: '.${{ steps.port.outputs.substring }}'
+        value: "abc123"
+        index_of_str: "ab"
+        
+#     - uses: bhowell2/github-substring-action@v1.0.0
+#       id: service
+#       with:
+#         value: 'api-gateway.4000'
+#         index_of_str: '.${{ steps.port.outputs.substring }}'
     
-    - name: ${{ steps.service.outputs.substring }}
-      run: echo ${{ steps.service.outputs.substring }}
+#     - name: ${{ steps.service.outputs.substring }}
+#       run: echo ${{ steps.service.outputs.substring }}
     
 
 #     - name: nodejsscan scan
