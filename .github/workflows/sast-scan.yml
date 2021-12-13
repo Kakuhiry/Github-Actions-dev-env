@@ -14,7 +14,7 @@ jobs:
     - uses: bhowell2/github-substring-action@v1.0.0
       id: port
       with:
-        value: "api-gateway.4000"
+        value: "apigateway4000"
         length_from_end: 4
     
     - name: ${{ steps.port.outputs.substring }}
