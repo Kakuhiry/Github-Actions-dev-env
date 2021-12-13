@@ -26,7 +26,8 @@ jobs:
         value: "abc123"
         index_of_str: "ab"
         
-    - name: ${{steps.one.outputs.substring}}
+    - name: ${{ steps.service.outputs.substring }}
+      run: echo ${{ steps.service.outputs.substring }}
         
 #     - uses: bhowell2/github-substring-action@v1.0.0
 #       id: service
