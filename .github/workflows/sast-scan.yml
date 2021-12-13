@@ -10,18 +10,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
-    - name: nodejsscan scan
-      id: njsscan
-      uses: ajinabraham/njsscan-action@master
+    
+    - uses: bhowell2/github-substring-action@v1.0.0
+      id: port
       with:
-        args: ". --sarif --output results.sarif || true"
-
-    - name: Upload scan reports
-      uses: actions/upload-artifact@v1.0.0
+        value: 'api-gateway.4000'
+        length_from_end: 4
+        
+    - uses: bhowell2/github-substring-action@v1.0.0
+      id: service
       with:
-        name: Source Code Security Scan Report - ${{ matrix.apps }}
-        path: results.sarif
+        value: 'api-gateway.4000'
+        index_of_str: '.${{ steps.port.outputs.substring }}'
+        
+    - name: ${{ steps.port.outputs.substring }}
+      run: echo ${{ steps.port.outputs.substring }}
+    
+    - name: ${{ steps.service.outputs.substring }}
+      run: echo ${{ steps.service.outputs.substring }}
+    
+
+#     - name: nodejsscan scan
+#       id: njsscan
+#       uses: ajinabraham/njsscan-action@master
+#       with:
+#         args: ". --sarif --output results.sarif || true"
+
+#     - name: Upload scan reports
+#       uses: actions/upload-artifact@v1.0.0
+#       with:
+#         name: Source Code Security Scan Report - ${{ matrix.apps }}
+#         path: results.sarif
         
 #     - name: Scan
 #       uses: ShiftLeftSecurity/scan-action@master
