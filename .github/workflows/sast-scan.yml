@@ -11,40 +11,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - uses: bhowell2/github-substring-action@v1.0.0
-      id: port
+    - name: Split version code
+      uses: xom9ikk/split@v1
+      id: split
       with:
-        value: "abc123"
-        length_from_end: 3
-    
-#     - uses: bhowell2/github-substring-action@v1.0.0
-#       id: port
-#       with:
-#         value: "api-gateway.4000"
-#         length_from_end: 4
-    
-    - name: ${{ steps.port.outputs.substring }}
-      run: echo ${{ steps.port.outputs.substring }}
-     
-    - uses: bhowell2/github-substring-action@v1.0.0
-      id: service
-      with:
-        value: "abc123"
-        index_of_str: "ab"
+        string: api-gateway.4000
+        separator: .
+        limit: -1
         
-    - name: ${{ steps.service.outputs.substring }}
-      run: echo ${{ steps.service.outputs.substring }}
-        
-#     - uses: bhowell2/github-substring-action@v1.0.0
-#       id: service
-#       with:
-#         value: 'api-gateway.4000'
-#         index_of_str: '.${{ steps.port.outputs.substring }}'
-    
-#     - name: ${{ steps.service.outputs.substring }}
-#       run: echo ${{ steps.service.outputs.substring }}
-    
-
+    - name: show results
+      run: |
+        cat ${{ steps.split.outputs._0 }}
+        cat ${{ steps.split.outputs._1 }}
 #     - name: nodejsscan scan
 #       id: njsscan
 #       uses: ajinabraham/njsscan-action@master
