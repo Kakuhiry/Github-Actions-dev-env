@@ -21,8 +21,8 @@ jobs:
         
     - name: show results
       run: |
-        cat ${{ steps.split.outputs._0 }}
-        cat ${{ steps.split.outputs._1 }}
+        echo ${{ steps.split.outputs._0 }}
+        echo ${{ steps.split.outputs._1 }}
 #     - name: nodejsscan scan
 #       id: njsscan
 #       uses: ajinabraham/njsscan-action@master
