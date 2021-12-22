@@ -1,6 +1,6 @@
 {
   "name": "@walnut/sermer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "index.js",
   "license": "MIT",
   "gitHead": "c8e39b3b023c1c810c569cb540738f1b987d0942"
