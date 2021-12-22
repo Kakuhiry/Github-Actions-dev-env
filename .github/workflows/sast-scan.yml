@@ -1,7 +1,7 @@
 name: "AppThreat/sast-scan"
 
 on:
-  pull_request:
+  push:
     branches: [ master ]
 
 jobs:
@@ -10,27 +10,49 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
-    - name: install
-      run: npm install
-
-    - name: Scan
-      uses: ShiftLeftSecurity/scan-action@master
-      env:
-        VDB_HOME: ${{ github.workspace }}/vdb
-        WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Split version code
+      uses: xom9ikk/split@v1
+      id: split
       with:
-        output: reports
+        string: api-gateway.4000
+        separator: .
+        limit: -1
+        
+    - name: show results
+      run: |
+        echo ${{ steps.split.outputs._0 }}
+        echo ${{ steps.split.outputs._1 }}
+#     - name: nodejsscan scan
+#       id: njsscan
+#       uses: ajinabraham/njsscan-action@master
+#       with:
+#         args: ". --sarif --output results.sarif || true"
 
-    - name: Upload scan reports
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: shiftleft-scan-reports
-        path: reports
+#     - name: Upload scan reports
+#       uses: actions/upload-artifact@v1.0.0
+#       with:
+#         name: Source Code Security Scan Report - ${{ matrix.apps }}
+#         path: results.sarif
+        
+#     - name: Scan
+#       uses: ShiftLeftSecurity/scan-action@master
+#       env:
+#         VDB_HOME: ${{ github.workspace }}/vdb
+#         WORKSPACE: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         SCAN_AUTO_BUILD: true
+#       with:
+#         output: reports
 
-    - name: MegaLinter
-      uses: megalinter/megalinter@v5.2.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        APPLY_FIXES_MODE: pull_request
+#     - name: Upload scan reports
+#       uses: actions/upload-artifact@v1.0.0
+#       with:
+#         name: shiftleft-scan-reports
+#         path: reports
+
+    # - name: MegaLinter
+    #   uses: megalinter/megalinter@v5.2.0
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     APPLY_FIXES_MODE: pull_request
