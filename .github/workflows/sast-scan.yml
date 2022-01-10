@@ -11,18 +11,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Split version code
-      uses: xom9ikk/split@v1
-      id: split
+    - uses: dorny/paths-filter@v2
+      id: filter
       with:
-        string: api-gateway.4000
-        separator: .
-        limit: -1
-        
-    - name: show results
-      run: |
-        echo ${{ steps.split.outputs._0 }}
-        echo ${{ steps.split.outputs._1 }}
+        filters: |
+          api-gateway:
+            - 'packages/server/**'
+
+           
+        base: ${{ github.ref }}
+
 #     - name: nodejsscan scan
 #       id: njsscan
 #       uses: ajinabraham/njsscan-action@master
