@@ -17,6 +17,8 @@ jobs:
         filters: |
           api-gateway:
             - 'packages/server/**'
+            - 'packages/common/**'
+            
 
            
         base: ${{ github.ref }}
