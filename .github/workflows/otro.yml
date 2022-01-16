@@ -21,6 +21,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - run: echo "That's a hooot take!!"
+
+        name: get github event
+      - run:  |
+          echo ${{fromJSON(github.event.client_payload)}}
+          echo ${{ github.event.client_payload.high}}
+          echo ${{ github.event.client_payload.medium}}
+          echo ${{ github.event.client_payload.low}}
 
         name: get github event object - High
       - run: echo ${{ github.event.client_payload.high}}
