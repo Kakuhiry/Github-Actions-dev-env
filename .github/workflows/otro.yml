@@ -21,9 +21,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
-        name: bla bla bla
-      - run: echo "That's a hooot take!!"
 
         name: get github event object - High
       - run: echo ${{ github.event.client_payload.high}}
