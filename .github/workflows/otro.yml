@@ -12,20 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-        name: Severity of found vulnerabilities - Queries
-      - run:  |
-          echo Severity of found vulnerabilities
-          echo High: ${{ github.event.client_payload.highQueries}}
-          echo Medium: ${{ github.event.client_payload.mediumQueries}}
-          echo Low: ${{ github.event.client_payload.lowQueries}}
-        
-        name: Severity of found vulnerabilities - Mutations
-      - run:  |
-          echo Severity of found vulnerabilities
-          echo High: ${{ github.event.client_payload.highMutations}}
-          echo Medium: ${{ github.event.client_payload.mediumMutations}}
-          echo Low: ${{ github.event.client_payload.lowMutations}}
+      - name: Debug action
+        uses: hmrr/debug-action@v2.0.1
 
-        name: get github event object - High
       - run: exit 1
         if: github.event.client_payload.high > 100
