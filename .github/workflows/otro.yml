@@ -29,8 +29,9 @@ jobs:
           echo Medium: ${{ github.event.client_payload.medium}}
           echo Low: ${{ github.event.client_payload.low}}
 
-      #   name: get github event object - High
-      # - run: echo ${{ github.event.client_payload.high}}
+        name: get github event object - High
+      - run: exit 1
+        if: github.event.client_payload.high > 1
 
       #   name: get github event object - Medium
       # - run: echo ${{ github.event.client_payload.medium}}
