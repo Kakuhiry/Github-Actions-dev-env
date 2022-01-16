@@ -21,10 +21,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: echo "That's a hooot take!!"
 
         name: Severity of found vulnerabilities
-
       - run:  |
           echo Severity of found vulnerabilities
           echo High: ${{ github.event.client_payload.high}}
