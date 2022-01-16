@@ -25,7 +25,7 @@ jobs:
 
         name: get github event
       - run:  |
-          echo ${{ fromJSON(github.event.client_payload) }}
+          echo ${{ toJSON(github.event.client_payload) }}
           echo ${{ github.event.client_payload.high}}
           echo ${{ github.event.client_payload.medium}}
           echo ${{ github.event.client_payload.low}}
