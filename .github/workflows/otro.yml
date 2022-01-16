@@ -4,61 +4,28 @@ on:
   repository_dispatch:
     types:
       - DAST-scan
-    # # We recommend triggering a scan when merging to your default branch as a best practice,
-    # # especially if you'd like to compare the results of two scans (e.g., a feature branch against the
-    # # default branch)
-    # branches:
-    #   - main
-    #   - master
+
 jobs:
   staging-sast-scan-code-test:
-    # needs: changes
-    # if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }}
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     apps: ${{ fromJSON(needs.changes.outputs.apps) }}
 
     steps:
       - uses: actions/checkout@v2
 
-        name: Severity of found vulnerabilities
+        name: Severity of found vulnerabilities - Queries
       - run:  |
           echo Severity of found vulnerabilities
-          echo High: ${{ github.event.client_payload.high}}
-          echo Medium: ${{ github.event.client_payload.medium}}
-          echo Low: ${{ github.event.client_payload.low}}
+          echo High: ${{ github.event.client_payload.highQueries}}
+          echo Medium: ${{ github.event.client_payload.mediumQueries}}
+          echo Low: ${{ github.event.client_payload.lowQueries}}
+        
+        name: Severity of found vulnerabilities - Mutations
+      - run:  |
+          echo Severity of found vulnerabilities
+          echo High: ${{ github.event.client_payload.highMutations}}
+          echo Medium: ${{ github.event.client_payload.mediumMutations}}
+          echo Low: ${{ github.event.client_payload.lowMutations}}
 
         name: get github event object - High
       - run: exit 1
-        if: github.event.client_payload.high > 1
-
-      #   name: get github event object - Medium
-      # - run: echo ${{ github.event.client_payload.medium}}
-
-      #   name: get github event object - Low
-      # - run: echo ${{ github.event.client_payload.low}}
-
-  #         path: Curbo-backend
-  # staging-sast-scan-code:
-  #   # needs: changes
-  #   # if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }}
-  #   runs-on: ubuntu-latest
-  #   # strategy:
-  #   #   matrix:
-  #   #     apps: ${{ fromJSON(needs.changes.outputs.apps) }}
-
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         path: Curbo-backend
-
-  #     - run: |
-  #         docker run -v $(pwd):/src --workdir /src/apps/buy returntocorp/semgrep-agent:v1 semgrep-agent --config "p/owasp-top-ten" --config "p/typescript" --config "p/nodejs" --config "p/github-actions" --config "p/semgrep-rule-lints" --audit-on unknown > report_buy.txt
-
-  #     - run: cat report_buy.txt
-
-  #     - uses: actions/upload-artifact@v2
-  #       with:
-  #         name: report_buy
-  #         path: report_buy.txt
+        if: github.event.client_payload.high > 100
