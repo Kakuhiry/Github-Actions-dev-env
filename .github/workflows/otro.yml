@@ -26,8 +26,14 @@ jobs:
         name: get github event
       - run: echo ${{ github.event.client_payload}}
 
-        name: get github event object
-      - run: echo ${{ github.event.client_payload.test}}
+        name: get github event object - High
+      - run: echo ${{ github.event.client_payload.high}}
+
+        name: get github event object - Medium
+      - run: echo ${{ github.event.client_payload.medium}}
+
+        name: get github event object - Low
+      - run: echo ${{ github.event.client_payload.low}}
   #         path: Curbo-backend
   # staging-sast-scan-code:
   #   # needs: changes
