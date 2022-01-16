@@ -22,6 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: echo "That's a hooot take!!"
+
+        name: get github event
+      - run: echo ${{ github.event.client_payload}}
+
+        name: get github event object
+      - run: echo ${{ github.event.client_payload.test}}
   #         path: Curbo-backend
   # staging-sast-scan-code:
   #   # needs: changes
