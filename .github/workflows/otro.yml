@@ -23,11 +23,13 @@ jobs:
       - uses: actions/checkout@v2
       - run: echo "That's a hooot take!!"
 
-        name: get github event
+        name: Severity of found vulnerabilities
+
       - run:  |
-          echo ${{ github.event.client_payload.high}}
-          echo ${{ github.event.client_payload.medium}}
-          echo ${{ github.event.client_payload.low}}
+          echo Severity of found vulnerabilities
+          echo High: ${{ github.event.client_payload.high}}
+          echo Medium: ${{ github.event.client_payload.medium}}
+          echo Low: ${{ github.event.client_payload.low}}
 
       #   name: get github event object - High
       # - run: echo ${{ github.event.client_payload.high}}
