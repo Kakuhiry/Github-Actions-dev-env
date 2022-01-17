@@ -30,4 +30,4 @@ jobs:
           echo Low: ${{ github.event.client_payload.mutations.low}}
 
       - run: exit 1
-        if: github.event.client_payload.high > 100
+        if: github.event.client_payload.mutations.medium > 0
