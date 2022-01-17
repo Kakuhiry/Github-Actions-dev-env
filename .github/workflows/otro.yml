@@ -29,5 +29,5 @@ jobs:
           echo Medium: ${{ github.event.client_payload.mutations.medium}}
           echo Low: ${{ github.event.client_payload.mutations.low}}
 
-      - run: exit 1
-        if: github.event.client_payload.queries.medium > 0
+#       - run: exit 1
+#         if: github.event.client_payload.queries.medium > 0
