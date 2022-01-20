@@ -29,13 +29,13 @@ jobs:
       - name: Exit in case of fail with no results
         run: exit 1
         if: |
-          github.event.client_payload.queries.high == null ||
-          github.event.client_payload.queries.medium == null ||
-          github.event.client_payload.queries.low == null ||
+          github.event.client_payload.queries.high == '' ||
+          github.event.client_payload.queries.medium == '' ||
+          github.event.client_payload.queries.low == '' ||
 
-          github.event.client_payload.mutations.high == null ||
-          github.event.client_payload.mutations.medium == null ||
-          github.event.client_payload.mutations.low == null
+          github.event.client_payload.mutations.high == '' ||
+          github.event.client_payload.mutations.medium == '' ||
+          github.event.client_payload.mutations.low == ''
 
       - name: Severity threshold to fail
         run: exit 1
