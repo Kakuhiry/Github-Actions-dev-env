@@ -1,0 +1,42 @@
+name: Staging security test - DAST
+
+on:
+  repository_dispatch:
+    types:
+      - DAST-scan
+
+jobs:
+  staging-sast-scan-code-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Severity of found vulnerabilities - Queries
+        run: |
+          echo Severity of found vulnerabilities
+          echo High: ${{ github.event.client_payload.queries.high}}
+          echo Medium: ${{ github.event.client_payload.queries.medium}}
+          echo Low: ${{ github.event.client_payload.queries.low}}
+
+      - name: Severity of found vulnerabilities - Mutations
+        run: |
+          echo Severity of found vulnerabilities
+          echo High: ${{ github.event.client_payload.mutations.high}}
+          echo Medium: ${{ github.event.client_payload.mutations.medium}}
+          echo Low: ${{ github.event.client_payload.mutations.low}}
+
+      - name: Exit in case of fail with no results
+        run: exit 1
+        if: |
+          github.event.client_payload.queries.high == "" ||
+          github.event.client_payload.queries.medium == "" ||
+          github.event.client_payload.queries.low == "" ||
+
+          github.event.client_payload.mutations.high == "" ||
+          github.event.client_payload.mutations.medium == "" ||
+          github.event.client_payload.mutations.low == ""
+
+      - name: Severity threshold to fail
+        run: exit 1
+        if: github.event.client_payload.queries.high > 20 || github.event.client_payload.mutations.high > 100
