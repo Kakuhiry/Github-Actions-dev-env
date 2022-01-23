@@ -1,0 +1,23 @@
+name: Staging security test - DAST
+
+on:
+  push:
+
+jobs:
+  staging-sast-scan-code-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: returntocorp/semgrep-action@v1
+        with:
+          generateSarif: "1"
+          config: >- # more at semgrep.dev/explore
+            p/security-audit
+            p/secrets
+            p/owasp-top-ten
+            p/typescript
+
+      - name: Inspect report file
+        run: cat semgrep.sarif
