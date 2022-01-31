@@ -10,11 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: AppThreat/dep-scan-action@master
+      - name: Scan
+        uses: ShiftLeftSecurity/scan-action@master
         env:
-          VULNDB_HOME: ${{ github.workspace }}/db
+          VDB_HOME: ${{ github.workspace }}/vdb
+          WORKSPACE: .
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/upload-artifact@v1
-        with:
-          name: reports
-          path: reports
+          SCAN_AUTO_BUILD: true
