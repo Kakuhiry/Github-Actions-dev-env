@@ -10,10 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Scan
-        uses: ShiftLeftSecurity/scan-action@master
-        env:
-          VDB_HOME: ${{ github.workspace }}/vdb
-          WORKSPACE: ./packages/common
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SCAN_AUTO_BUILD: true
+      - name: nodejsscan scan
+        id: njsscan
+        uses: ajinabraham/njsscan-action@master
+        with:
+          args: '. --sarif --output results.sarif || true'
