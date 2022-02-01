@@ -6,17 +6,25 @@ on:
 jobs:
   staging-sast-scan-code-test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Self sast-scan
-        uses: AppThreat/sast-scan-action@v1.0.0
-        with:
-          output: reports
-          type: nodejs
-      - name: Upload scan reports
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: sast-scan-reports
-          path: reports
+        - name: Checkout action
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+            
+        - name: Fetch changes
+          run: |
+            CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRT ${{github.event.pull_request.base.sha}} ${{github.sha}} | grep -E '*.js|*.jsx' | xargs)
+            IFS=' ' tokens=($CHANGED_FILES)
+            SCAN_FILES=$(echo "$CHANGED_FILES" | tr ' ' '\n' | sed 's/[^ ]* */--include=&/g' | tr '\n' ' ')
+            echo "SCAN_FILES=$(echo $SCAN_FILES)" >> $GITHUB_ENV
+        - name: Run semgrep
+          uses: tsigouris007/action-semgrep-reviewdog@v[VERSION_NUMBER]
+          with:
+            github_token: ${{ secrets.github_token }}
+            level: error
+            reporter: github-pr-check
+            filter_mode: nofilter
+            semgrep_flags: "${{ env.SCAN_FILES }} --config=p/ci --disable-version-check"
+            tool_name: Semgrep findings
+            semgrep_ignore: "https://raw.github.com/repo/branch/semgrep.ignore"
