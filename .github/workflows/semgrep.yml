@@ -14,7 +14,7 @@ jobs:
         uses: AppThreat/sast-scan-action@v1.0.0
         with:
           output: reports
-          type: python,bash
+          type: nodejs
       - name: Upload scan reports
         uses: actions/upload-artifact@v1.0.0
         with:
