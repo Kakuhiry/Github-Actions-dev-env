@@ -19,7 +19,7 @@ jobs:
             SCAN_FILES=$(echo "$CHANGED_FILES" | tr ' ' '\n' | sed 's/[^ ]* */--include=&/g' | tr '\n' ' ')
             echo "SCAN_FILES=$(echo $SCAN_FILES)" >> $GITHUB_ENV
         - name: Run semgrep
-          uses: tsigouris007/action-semgrep-reviewdog@v[VERSION_NUMBER]
+          uses: tsigouris007/action-semgrep-reviewdog@v0.4
           with:
             github_token: ${{ secrets.github_token }}
             level: error
