@@ -1,10 +1,13 @@
-name: Staging security test - DAST
+on: pull_request
 
-on:
-  push:
+env:
+  PR_NUMBER: ${{ github.event.pull_request.number }}
 
 jobs:
-  staging-sast-scan-code-test:
-    runs-on: ubuntu-latest
+  job1:
+    . . .
     steps:
-        - run: echo ${{ github.event.number }}
+      - name: view the PR number
+        run: |
+          echo "PR number = ${{ github.event.pull_request.number }}"
+          echo "PR number = ${{ env.PR_NUMBER }}"
