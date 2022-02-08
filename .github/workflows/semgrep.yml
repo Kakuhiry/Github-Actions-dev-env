@@ -7,21 +7,4 @@ jobs:
   staging-sast-scan-code-test:
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout action
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-            
-        - name: Install deps
-          run: |
-            sudo apt-get update -y
-            sudo apt-get install -y libevent-dev libseccomp-dev git libsasl2-dev
-        - name: Build
-          run: |
-            gcc --version
-            ./autogen.sh
-            ./configure --enable-seccomp --enable-tls --enable-sasl --enable-sasl-pwdb
-            make -j
-        # step 3
-        - name: coderrect scan
-          uses: coderrect-inc/coderrect-github-action@main
+        - run: echo ${{ github.event.number }}
