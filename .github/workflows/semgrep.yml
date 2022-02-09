@@ -18,3 +18,4 @@ jobs:
       id: extract_branch
       
     - run: echo ${{ steps.extract_branch.outputs.branch }}
+    - run: echo ${{GITHUB_BASE_REF}}
