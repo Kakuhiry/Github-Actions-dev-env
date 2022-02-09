@@ -11,3 +11,10 @@ jobs:
       run: |
         echo "PR number = ${{ github.event.pull_request.number }}"
         echo "PR number = ${{ env.PR_NUMBER }}"
+        
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF#refs/heads/})"
+      id: extract_branch
+      
+    - run: echo ${{ steps.extract_branch.outputs.branch }}
