@@ -5,18 +5,12 @@ jobs:
   docker-testing:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: "0"
-          ref: "Kakuhiry-patch-7"
-      
       - name: pull-request-action
         id: pull_request
         uses: vsoch/pull-request-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_FROM_BRANCH: "Kakuhiry-patch-7"
+          PULL_REQUEST_FROM_BRANCH: "Kakuhiry-patch-4"
           PULL_REQUEST_BRANCH: "master"
           PULL_REQUEST_TITLE: "new-version [skip ci]"
           
