@@ -1,20 +1,37 @@
-on: pull_request
-
-env:
-  PR_NUMBER: ${{ github.event.pull_request.number }}
+on:
+  push:
 
 jobs:
   docker-testing:
     runs-on: ubuntu-latest
     steps:
-    - name: view the PR number
-      run: |
-        echo "PR number = ${{ github.event.pull_request.number }}"
-        echo "PR number = ${{ env.PR_NUMBER }}"
-        
-    - name: Extract branch name
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_BASE_REF#refs/heads/})"
-      id: extract_branch
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+          ref: "Kakuhiry-patch-7"
       
-    - run: echo ${{ steps.extract_branch.outputs.branch }}
+      - name: pull-request-action
+        id: pull_request
+        uses: vsoch/pull-request-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST_FROM_BRANCH: "Kakuhiry-patch-7"
+          PULL_REQUEST_BRANCH: "master"
+          PULL_REQUEST_TITLE: "new-version [skip ci]"
+          
+      - name: Auto approve version PR
+        uses: hmarr/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.ACCESS_TOKEN }}
+          pull-request-number: ${{ steps.pull_request.outputs.pull_request_number }}
+
+      - name: Auto merge version PR
+        uses: pascalgn/automerge-action@v0.14.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          PULL_REQUEST: ${{ steps.pull_request.outputs.pull_request_number }}
+          MERGE_LABELS: "automerge"
+          UPDATE_LABELS: "automerge"
+          MERGE_DELETE_BRANCH: true
+          MERGE_METHOD: rebase
