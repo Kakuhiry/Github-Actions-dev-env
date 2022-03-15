@@ -10,7 +10,7 @@ jobs:
         uses: vsoch/pull-request-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_FROM_BRANCH: "Kakuhiry-patch-4"
+          PULL_REQUEST_FROM_BRANCH: "Kakuhiry-patch-3"
           PULL_REQUEST_BRANCH: "master"
           PULL_REQUEST_TITLE: "new-version [skip ci]"
           
@@ -25,5 +25,5 @@ jobs:
         id: merge
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
-          source: 'Kakuhiry-patch-4'
+          source: 'Kakuhiry-patch-3'
           target: 'master'
