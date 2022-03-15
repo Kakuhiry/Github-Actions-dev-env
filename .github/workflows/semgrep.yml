@@ -1,13 +1,22 @@
-on: pull_request
-
-env:
-  PR_NUMBER: ${{ github.event.pull_request.number }}
+on:
+  push:
 
 jobs:
   docker-testing:
     runs-on: ubuntu-latest
     steps:
-    - name: view the PR number
-      run: |
-        echo "PR number = ${{ github.event.pull_request.number }}"
-        echo "PR number = ${{ env.PR_NUMBER }}"
+      - name: Auto approve version PR
+        uses: hmarr/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.ACCESS_TOKEN }}
+          pull-request-number: 28
+
+      - name: Auto merge version PR
+        uses: pascalgn/automerge-action@v0.14.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          PULL_REQUEST: 28
+          MERGE_LABELS: "automerge"
+          UPDATE_LABELS: "automerge"
+          MERGE_DELETE_BRANCH: true
+          MERGE_METHOD: rebase
