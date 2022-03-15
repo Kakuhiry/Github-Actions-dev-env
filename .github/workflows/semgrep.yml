@@ -18,14 +18,14 @@ jobs:
         uses: hmarr/auto-approve-action@v2
         with:
           github-token: ${{ secrets.ACCESS_TOKEN }}
-          pull-request-number: ${{ steps.pull_request.outputs.pull_request_number }}
+          pull-request-number: 25
 
       - name: Auto merge version PR
         uses: pascalgn/automerge-action@v0.14.3
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          PULL_REQUEST: ${{ steps.pull_request.outputs.pull_request_number }}
-          MERGE_LABELS: "automerge"
-          UPDATE_LABELS: "automerge"
+          PULL_REQUEST: 25
+          MERGE_LABELS: automerge
+          UPDATE_LABELS: automerge
           MERGE_DELETE_BRANCH: true
           MERGE_METHOD: rebase
