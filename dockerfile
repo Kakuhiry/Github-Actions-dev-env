@@ -4,7 +4,6 @@ WORKDIR /usr/src/packages
 COPY ./packages/common/package.json ./usr/src/packages
 COPY ./packages/server/package.json ./usr/src/packages
 
-RUN npm i
 
 COPY packages /usr/packages
 
