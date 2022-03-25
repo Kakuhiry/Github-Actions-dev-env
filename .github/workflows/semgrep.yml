@@ -20,6 +20,8 @@ jobs:
           filters: |
             base:
               - 'base/**'
+            prod:
+              - 'prod/**'
   testing:
     needs: changes
     if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }} || steps.changes.outputs.base == 'true' 
