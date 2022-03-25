@@ -22,11 +22,11 @@ jobs:
               - 'base/**'
   testing:
     needs: changes
-    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }} 
+    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' || steps.changes.outputs.base == 'true'}} 
     runs-on: ubuntu-latest
     strategy:
       matrix:
         apps: ${{ fromJSON(needs.changes.outputs.apps) }}
         node-version: [14.x]
     steps:
-      - run: echo ${{ steps.docker.outputs.base }} 
+      - run: echo ${{ steps.changes.outputs.base }} 
