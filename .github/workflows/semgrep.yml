@@ -23,7 +23,6 @@ jobs:
         
   testing:
     needs: docker
-    if: ${{ needs.docker.outputs.apps != '[]' && needs.docker.outputs.apps != '' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
