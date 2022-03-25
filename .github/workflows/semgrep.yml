@@ -32,4 +32,4 @@ jobs:
         node-version: [14.x]
     steps:
       - run: echo ${{ steps.changes.outputs.base }} 
-        if: steps.changes.outputs.base == 'true' 
+        if: ${{ steps.changes.outputs.base == 'true' }}
