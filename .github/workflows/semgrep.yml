@@ -18,7 +18,7 @@ jobs:
         with:
           ref: master
           filters: |
-            common:
+            base:
               - 'base/**'
         
       - name: aa
