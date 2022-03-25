@@ -32,3 +32,4 @@ jobs:
         node-version: [14.x]
     steps:
       - run: echo ${{ contains(fromJSON(needs.changes.outputs.apps), 'base') }}
+        if: ${{ contains(fromJSON(needs.changes.outputs.apps), 'base') == 'false'}}
