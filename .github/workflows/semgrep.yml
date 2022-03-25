@@ -21,6 +21,14 @@ jobs:
             base:
               - 'base/**'
         
+  testing:
+    needs: changes
+    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        apps: ${{ fromJSON(needs.changes.outputs.apps) }}
+    steps:
       - name: aa
         run: echo ${{ steps.docker.outputs.base }} 
         
