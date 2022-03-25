@@ -31,5 +31,4 @@ jobs:
         apps: ${{ fromJSON(needs.changes.outputs.apps) }}
         node-version: [14.x]
     steps:
-      - run: echo ${{ fromJSON(needs.changes.outputs.apps) }}
-        if: ${{ steps.changes.outputs.base == 'true' }}
+      - run: echo ${{ contains(fromJSON(needs.changes.outputs.apps), 'base') }}
