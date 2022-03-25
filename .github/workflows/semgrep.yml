@@ -22,7 +22,7 @@ jobs:
               - 'base/**'
   testing:
     needs: changes
-    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' || steps.changes.outputs.base == 'true'}} 
+    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }} || steps.changes.outputs.base == 'true' 
     runs-on: ubuntu-latest
     strategy:
       matrix:
