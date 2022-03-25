@@ -4,31 +4,27 @@ on:
     type: "a"
 
 jobs:
-  docker:
+  changes:
     runs-on: ubuntu-latest
     outputs:
-      apps: ${{ steps.filter.outputs.docker }}
+      # Expose matched filters as job 'packages' output variable
+      apps: ${{ steps.filter.outputs.changes }}
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
-          
+          fetch-depth: "0"
+
       - uses: dorny/paths-filter@v2
         id: filter
         with:
-          ref: master
           filters: |
             base:
               - 'base/**'
-        
   testing:
-    needs: docker
+    needs: changes
+    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }} 
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        apps: ${{ fromJSON(needs.docker.outputs.apps) }}
-    steps:
-      - name: aa
-        run: echo ${{ steps.docker.outputs.base }} 
-        
-        
+        apps: ${{ fromJSON(needs.changes.outputs.apps) }}
+        node-version: [14.x]
