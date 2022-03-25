@@ -4,14 +4,20 @@ on:
     type: "a"
 
 jobs:
-  docker-testing:
+  changes:
     runs-on: ubuntu-latest
+    outputs:
+      apps: ${{ steps.filter.outputs.changes }}
     steps:
-      - name: a
-        if: ${{ github.event.action == 'a' }}
-        run: echo "HAHAHAHAH!!"
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            common:
+              - 'base/**'
         
       - name: aa
+        if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }} || steps.docker.outputs.base == 'true'
         run: echo ${{ github.event_name }} 
         
         
