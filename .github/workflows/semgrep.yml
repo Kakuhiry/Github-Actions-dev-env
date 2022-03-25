@@ -8,5 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: a
-        if: ${{ github.event.event_type == "a" }}
+        if: ${{ github.event.event_type == a }}
         run: echo "a"
