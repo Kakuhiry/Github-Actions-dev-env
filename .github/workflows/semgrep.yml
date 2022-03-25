@@ -22,7 +22,6 @@ jobs:
               - 'base/**'
         
       - name: aa
-        if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' || steps.docker.outputs.base == 'false' }}
-        run: echo ${{ github.event_name }} 
+        run: echo ${{ steps.docker.outputs.base }} 
         
         
