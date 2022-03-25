@@ -9,6 +9,10 @@ jobs:
     outputs:
       apps: ${{ steps.filter.outputs.changes }}
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
       - uses: dorny/paths-filter@v2
         id: filter
         with:
