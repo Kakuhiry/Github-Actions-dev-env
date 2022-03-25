@@ -10,3 +10,8 @@ jobs:
       - name: a
         if: ${{ github.event.action == 'a' }}
         run: echo "HAHAHAHAH!!"
+        
+      - name: aa
+        run: echo ${{ github.event_name }} 
+        
+        
