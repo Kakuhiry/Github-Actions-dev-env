@@ -7,7 +7,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     outputs:
-      apps: ${{ steps.filter.outputs.changes }}
+      apps: ${{ steps.filter.outputs.docker }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -23,11 +23,11 @@ jobs:
         
   testing:
     needs: docker
-    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }}
+    if: ${{ needs.docker.outputs.apps != '[]' && needs.docker.outputs.apps != '' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        apps: ${{ fromJSON(needs.changes.outputs.apps) }}
+        apps: ${{ fromJSON(needs.docker.outputs.apps) }}
     steps:
       - name: aa
         run: echo ${{ steps.docker.outputs.base }} 
