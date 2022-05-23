@@ -19,3 +19,4 @@ jobs:
           PULL_REQUEST_FROM_BRANCH: "a"
           PULL_REQUEST_BRANCH: "new-version"
           PULL_REQUEST_TITLE: "new-version [skip ci]"
+          
