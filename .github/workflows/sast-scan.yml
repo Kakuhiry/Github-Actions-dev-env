@@ -8,6 +8,4 @@ jobs:
     get:
      runs-on: ubuntu-latest
      steps:
-      - run: echo "PR number = ${{ github.event.pull_request.number }}"
-
       - run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}
