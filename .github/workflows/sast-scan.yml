@@ -1,7 +1,9 @@
 name: "AppThreat/sast-scan"
 
 on:
-  pull_request:
+  push:
+    branches:
+      - "a"
 
 jobs:
     create-PR1:
@@ -17,7 +19,3 @@ jobs:
           PULL_REQUEST_FROM_BRANCH: "a"
           PULL_REQUEST_BRANCH: "new-version"
           PULL_REQUEST_TITLE: "new-version [skip ci]"
-
-      - run: echo "PR number = ${{ github.event.pull_request.number }}"
-
-      - run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}
