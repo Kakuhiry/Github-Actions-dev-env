@@ -1,0 +1,34 @@
+on:
+  push:
+  repository_dispatch:
+    type: "a"
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'packages' output variable
+      apps: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            base:
+              - 'base/**'
+            prod:
+              - 'prod/**'
+  testing:
+    needs: changes
+    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        apps: ${{ fromJSON(needs.changes.outputs.apps) }}
+        node-version: [14.x]
+    steps:
+      - run: echo ${{ needs.changes.outputs.apps }}
