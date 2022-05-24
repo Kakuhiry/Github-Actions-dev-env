@@ -1,4 +1,4 @@
-name: "AppThreat/sast-scan"
+name: DAST scan completition check
 
 on:
   push:
@@ -6,17 +6,7 @@ on:
       - "a"
 
 jobs:
-    create-PR1:
-     outputs:
-       pr-number: ${{ steps.pull_request.outputs.pull_request_number }}
+    get:
      runs-on: ubuntu-latest
      steps:
-      - name: pull-request-action
-        id: pull_request
-        uses: vsoch/pull-request-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_FROM_BRANCH: "a"
-          PULL_REQUEST_BRANCH: "new-version"
-          PULL_REQUEST_TITLE: "new-version [skip ci]"
-          
+      - run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}
