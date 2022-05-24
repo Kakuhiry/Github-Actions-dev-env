@@ -1,34 +1,29 @@
 on:
   push:
-  repository_dispatch:
-    type: "a"
 
 jobs:
-  changes:
+  docker-testing:
     runs-on: ubuntu-latest
-    outputs:
-      # Expose matched filters as job 'packages' output variable
-      apps: ${{ steps.filter.outputs.changes }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: "0"
+#       - name: pull-request-action
+#         id: pull_request
+#         uses: vsoch/pull-request-action@master
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           PULL_REQUEST_FROM_BRANCH: "Kakuhiry-patch-3"
+#           PULL_REQUEST_BRANCH: "master"
+#           PULL_REQUEST_TITLE: "new-version [skip ci]"
+          
+#       - name: Auto approve version PR
+#         uses: hmarr/auto-approve-action@v2
+#         with:
+#           github-token: ${{ secrets.ACCESS_TOKEN }}
+#           pull-request-number: ${{ steps.pull_request.outputs.pull_request_number }}
 
-      - uses: dorny/paths-filter@v2
-        id: filter
+      - name: merge
+        uses: mtanzi/action-automerge@v1
+        id: merge
         with:
-          filters: |
-            base:
-              - 'base/**'
-            prod:
-              - 'prod/**'
-  testing:
-    needs: changes
-    if: ${{ needs.changes.outputs.apps != '[]' && needs.changes.outputs.apps != '' }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        apps: ${{ fromJSON(needs.changes.outputs.apps) }}
-        node-version: [14.x]
-    steps:
-      - run: echo ${{ needs.changes.outputs.apps }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          source: 'a'
+          target: 'master'
