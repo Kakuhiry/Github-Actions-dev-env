@@ -1,33 +1,13 @@
 name: DAST scan completition check
 
 on:
-  repository_dispatch:
-    types:
-      - DAST-scan
-
+  pull_request:
+  
+  
 jobs:
-  staging-sast-scan-code-test:
-    runs-on: ubuntu-latest
+    get:
+     runs-on: ubuntu-latest
+     steps:
+      - run: echo "PR number = ${{ github.event.pull_request.number }}"
 
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Debug action
-        uses: hmarr/debug-action@v2.0.1
-
-      - name: Severity of found vulnerabilities - Queries
-        run:  |
-          echo Severity of found vulnerabilities
-          echo High: ${{ github.event.client_payload.queries.high}}
-          echo Medium: ${{ github.event.client_payload.queries.medium}}
-          echo Low: ${{ github.event.client_payload.queries.low}}
-        
-      - name: Severity of found vulnerabilities - Mutations
-        run:  |
-          echo Severity of found vulnerabilities
-          echo High: ${{ github.event.client_payload.mutations.high}}
-          echo Medium: ${{ github.event.client_payload.mutations.medium}}
-          echo Low: ${{ github.event.client_payload.mutations.low}}
-
-#       - run: exit 1
-#         if: github.event.client_payload.queries.medium > 0
+      - run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}

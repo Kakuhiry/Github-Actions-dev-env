@@ -1,9 +1,10 @@
 name: DAST scan completition check
 
 on:
-  pull_request:
-  
-  
+  push:
+    branches:
+      - "a"
+
 jobs:
     get:
      runs-on: ubuntu-latest
