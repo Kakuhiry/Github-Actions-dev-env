@@ -5,20 +5,20 @@ jobs:
   docker-testing:
     runs-on: ubuntu-latest
     steps:
-#       - name: pull-request-action
-#         id: pull_request
-#         uses: vsoch/pull-request-action@master
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           PULL_REQUEST_FROM_BRANCH: "Kakuhiry-patch-3"
-#           PULL_REQUEST_BRANCH: "master"
-#           PULL_REQUEST_TITLE: "new-version [skip ci]"
+      - name: pull-request-action
+        id: pull_request
+        uses: vsoch/pull-request-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST_FROM_BRANCH: "a"
+          PULL_REQUEST_BRANCH: "master"
+          PULL_REQUEST_TITLE: "new-version [skip ci]"
           
-#       - name: Auto approve version PR
-#         uses: hmarr/auto-approve-action@v2
-#         with:
-#           github-token: ${{ secrets.ACCESS_TOKEN }}
-#           pull-request-number: ${{ steps.pull_request.outputs.pull_request_number }}
+      - name: Auto approve version PR
+        uses: hmarr/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.ACCESS_TOKEN }}
+          pull-request-number: ${{ steps.pull_request.outputs.pull_request_number }}
 
       - name: merge
         uses: mtanzi/action-automerge@v1
