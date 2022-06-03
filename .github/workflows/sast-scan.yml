@@ -10,5 +10,5 @@ jobs:
      runs-on: ubuntu-latest
      steps:
       - name: a
-        if: contains(github.event.head_commit.message, 'feat('(.*?)'):')
+        if: contains(github.event.head_commit.message, 'feat(.*?):')
         run: echo "this works well"
