@@ -3,10 +3,12 @@ name: DAST scan completition check
 on:
   push:
     branches:
-      - "a"
+      - "master"
 
 jobs:
     get:
      runs-on: ubuntu-latest
      steps:
-      - run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}
+      - name: a
+        if: contains(github.event.head_commit.message, 'feat(*):')
+        run: echo "this works well"
